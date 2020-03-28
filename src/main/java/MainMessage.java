@@ -1,20 +1,18 @@
-import java.util.List;
+import java.util.ArrayList;
 
 public class MainMessage extends Message {
-    List<Reply> replies;
+    private ArrayList<Reply> replies;
 
     public MainMessage() {
+        this.replies = new ArrayList<Reply>();
     }
 
-    public MainMessage(List<Reply> replies) {
-        this.replies = replies;
+    public void addMsg(Reply msg) {
+        replies.add(msg);
     }
 
-    public List<Reply> getReplies() {
-        return replies;
+    public void removeMsg(Reply msg) {
+        replies.remove(msg);
     }
 
-    public void setReplies(List<Reply> replies) {
-        this.replies = replies;
-    }
 }

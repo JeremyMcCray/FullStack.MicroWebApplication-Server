@@ -1,20 +1,41 @@
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 
 public abstract class Message {
     private User speaker;
     private String content;
     private Date timeStamp;
-    private Map<String, Integer> reactions;
+    private Map<String, List<String>> reactions;
 
     public Message() {
     }
 
-    public Message(User speaker, String content, Date timeStamp, Map<String, Integer> reactions){
+    public Message(User speaker, String content, Date timeStamp, Map<String, List<String>> reactions){
         this.speaker = speaker;
         this.content = content;
         this.timeStamp = timeStamp;
         this.reactions = reactions;
+    }
+
+    public Map<String, List<String>> getReactions() {
+        return reactions;
+    }
+
+    public void setReactions(Map<String, List<String>> reactions) {
+        this.reactions = reactions;
+    }
+
+    public void add(String reactionName, String reactionEmoji){
+        List<String> emoji = new ArrayList<>();
+        emoji.add(reactionEmoji);
+        reactions.put(reactionName, emoji);
+    }
+
+    public void remove(String reactionName){
+        reactions.remove(reactionName);
+    }
+
+    public List<String> lookup(String reactionName){
+        return reactions.get(reactionName);
     }
 
     public User getSpeaker() {
@@ -41,11 +62,5 @@ public abstract class Message {
         this.timeStamp = timeStamp;
     }
 
-    public Map<String, Integer> getReactions() {
-        return reactions;
-    }
 
-    public void setReactions(Map<String, Integer> reactions) {
-        this.reactions = reactions;
-    }
 }
