@@ -1,6 +1,8 @@
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Date;
+
 public class MainMessageTest {
 
     MainMessage mainMessage = new MainMessage();
@@ -68,16 +70,25 @@ public class MainMessageTest {
         Assert.assertEquals(expectedEmoji,actualEmoji);
     }
 
-//    @Test
-//    public void getSpeaker() {
-//        Message m1 = new MainMessage();
-////        m1.setSpeaker();
-//        User expected = m1.getSpeaker();
-//
-//        Assert.assertEquals(expected,m1.setSpeaker());
-//    }
+    @Test
+    public void getSpeaker() {
+        Message m1 = new MainMessage();
+        User u1 = new User("John198","PassW0rd","john@email.com","John Wick" );
+       m1.setSpeaker(u1);
+        User expected = m1.getSpeaker();
+        Assert.assertEquals(expected,u1);
+    }
 
-        @Test
+    @Test
+    public void setSpeaker() {
+        Message m1 = new MainMessage();
+        User u1 = new User("John198","PassW0rd","john@email.com","John Wick" );
+        m1.setSpeaker(u1);
+        User expected = m1.getSpeaker();
+        Assert.assertEquals(expected,u1);
+    }
+
+    @Test
     public void getContent() {
         Message m1 = new MainMessage();
         m1.setContent("Hello World");
@@ -89,8 +100,26 @@ public class MainMessageTest {
     public void setContent() {
         Message m1 = new MainMessage();
         m1.setContent("Hello World");
-        Assert.assertTrue("Hello World",true);
+        String expected = m1.getContent();
+        Assert.assertEquals(expected,"Hello World");
     }
+
+
+//    @Test
+//    public void getTime() {
+//        Message m1 = new MainMessage();
+//        Date d1 = new Date();
+//        m1.setTimeStamp(d1.;
+//        String expected = m1.getTimeStamp());
+//        Assert.assertEquals(expected,"Hello World");
+//    }
+//
+//    @Test
+//    public void setTime() {
+//        Message m1 = new MainMessage();
+//        m1.setTimeStamp("Hello World");
+//        Assert.assertTrue("Hello World",true);
+//    }
 
 
 }
