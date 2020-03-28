@@ -62,5 +62,4 @@ public abstract class Message {
         this.timeStamp = timeStamp;
     }
 
-
 }
