@@ -1,2 +1,2 @@
-public class Reply {
+public class Reply extends Message {
 }
