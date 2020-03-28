@@ -36,4 +36,15 @@ public class MainMessageTest {
         Integer actual = mainMessage.replies.size();
         Assert.assertEquals(expected,actual);
     }
+
+    @Test
+    public void addTest(){
+        Message m1 = new MainMessage();
+        String reactionName = "Happy";
+        String reactionEmoji = ":)";
+        m1.add(reactionName,reactionEmoji);
+        Assert.assertTrue(m1.getReactions().containsValue(reactionEmoji));
+    }
+
 }
+

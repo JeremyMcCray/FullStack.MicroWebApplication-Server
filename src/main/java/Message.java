@@ -4,37 +4,36 @@ public abstract class Message {
     private User speaker;
     private String content;
     private Date timeStamp;
-    private Map<String, List<String>> reactions;
+    private Map<String, String> reactions;
 
     public Message() {
+        this.reactions = new HashMap<>();
     }
 
-    public Message(User speaker, String content, Date timeStamp, Map<String, List<String>> reactions){
+    public Message(User speaker, String content, Date timeStamp, Map<String, String> reactions){
         this.speaker = speaker;
         this.content = content;
         this.timeStamp = timeStamp;
         this.reactions = reactions;
     }
 
-    public Map<String, List<String>> getReactions() {
+    public Map<String, String> getReactions() {
         return reactions;
     }
 
-    public void setReactions(Map<String, List<String>> reactions) {
+    public void setReactions(Map<String, String> reactions) {
         this.reactions = reactions;
     }
 
     public void add(String reactionName, String reactionEmoji){
-        List<String> emoji = new ArrayList<>();
-        emoji.add(reactionEmoji);
-        reactions.put(reactionName, emoji);
+        reactions.put(reactionName, reactionEmoji);
     }
 
     public void remove(String reactionName){
         reactions.remove(reactionName);
     }
 
-    public List<String> lookup(String reactionName){
+    public String lookup(String reactionName){
         return reactions.get(reactionName);
     }
 
