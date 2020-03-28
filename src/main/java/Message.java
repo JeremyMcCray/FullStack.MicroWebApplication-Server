@@ -1,16 +1,17 @@
+import java.time.LocalDate;
 import java.util.*;
 
 public abstract class Message {
     private User speaker;
     private String content;
-    private Date timeStamp;
+    private LocalDate timeStamp;
     private Map<String, String> reactions;
 
     public Message() {
         this.reactions = new HashMap<>();
     }
 
-    public Message(User speaker, String content, Date timeStamp, Map<String, String> reactions){
+    public Message(User speaker, String content, LocalDate timeStamp, Map<String, String> reactions){
         this.speaker = speaker;
         this.content = content;
         this.timeStamp = timeStamp;
@@ -53,11 +54,11 @@ public abstract class Message {
         this.content = content;
     }
 
-    public Date getTimeStamp() {
+    public LocalDate getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(Date timeStamp) {
+    public void setTimeStamp(LocalDate timeStamp) {
         this.timeStamp = timeStamp;
     }
 

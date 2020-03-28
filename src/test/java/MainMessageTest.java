@@ -1,7 +1,10 @@
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainMessageTest {
 
@@ -37,6 +40,27 @@ public class MainMessageTest {
         Integer expected = 2;
         Integer actual = mainMessage.replies.size();
         Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void getReaction() {
+        Message m1 = new MainMessage();
+        String reactionName = "Happy";
+        String reactionEmoji = ":)";
+        m1.add(reactionName,reactionEmoji);
+        Map<String, String> expected = m1.getReactions();
+        Assert.assertTrue(expected.containsValue(reactionEmoji));
+    }
+
+    @Test
+    public void setReaction() {
+        Message m1 = new MainMessage();
+        Map<String,String> myMap = new HashMap<>();
+        String reactionName = "Happy";
+        String reactionEmoji = ":)";
+        myMap.put(reactionName,reactionEmoji);
+        m1.setReactions(myMap);
+        Assert.assertEquals(m1.getReactions(), myMap);
     }
 
     @Test
@@ -105,22 +129,23 @@ public class MainMessageTest {
     }
 
 
-//    @Test
-//    public void getTime() {
-//        Message m1 = new MainMessage();
-//        Date d1 = new Date();
-//        m1.setTimeStamp(d1.;
-//        String expected = m1.getTimeStamp());
-//        Assert.assertEquals(expected,"Hello World");
-//    }
-//
-//    @Test
-//    public void setTime() {
-//        Message m1 = new MainMessage();
-//        m1.setTimeStamp("Hello World");
-//        Assert.assertTrue("Hello World",true);
-//    }
+    @Test
+    public void getTime() {
+        Message m1 = new MainMessage();
+        LocalDate d1 =  LocalDate.now();
+        m1.setTimeStamp(d1);
+        LocalDate expected = m1.getTimeStamp();
+        Assert.assertEquals(expected, d1);
+    }
 
+    @Test
+    public void setTime() {
+        Message m1 = new MainMessage();
+        LocalDate d1 =  LocalDate.now();
+        m1.setTimeStamp(d1);
+        LocalDate expected = m1.getTimeStamp();
+        Assert.assertEquals(expected, d1);
+    }
 
 }
 
