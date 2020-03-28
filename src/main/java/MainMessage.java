@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class MainMessage extends Message {
-    private ArrayList<Reply> replies;
+    ArrayList<Reply> replies;
 
     public MainMessage() {
         this.replies = new ArrayList<Reply>();
