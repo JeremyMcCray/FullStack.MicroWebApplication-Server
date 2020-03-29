@@ -33,7 +33,7 @@
 
 ### TCP Application
 
-#### User Stories to Fulfill  
+#### models.User Stories to Fulfill  
 * As a client, (not logged in) I
     * can send messages to a _peer_.
 	* can view default channels
@@ -48,7 +48,7 @@
 
 ### Blog Application
 
-#### User Stories to Fulfill  
+#### models.User Stories to Fulfill  
 * As a client, (not logged in) I
     * can create new blog posts
         * A blog post can consist of images and text
@@ -64,7 +64,7 @@
 
 ### Video Library Application
 
-#### User Stories to Fulfill  
+#### models.User Stories to Fulfill  
 * As a client, (not logged in) I
     * can upload new videos
 	* can view list of all videos
@@ -76,7 +76,7 @@
 
 ### Money Management Application
 
-#### User Stories to Fulfill  
+#### models.User Stories to Fulfill  
 * As a client, (not logged in) I
 	* can create new accounts
 	* deposit money to each account
