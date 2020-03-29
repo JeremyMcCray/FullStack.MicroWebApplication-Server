@@ -1,14 +1,22 @@
+package models;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class UserTest {
 
-    User user = new User("John198","PassW0rd","john@email.com","John Wick" );
+    User user = new User();
+
+    @Before
+    public void setUp(){
+        user.setUserId("John198");
+        user.setPassWord("PassW0rd");
+        user.setEmail("john@email.com");
+        user.setName("John Wick");
+    }
 
     @Test
-    public void getUserId() {
-        Assert.assertEquals("John198",user.getUserId());
-    }
+    public void getUserId() { Assert.assertEquals("John198",user.getUserId()); }
 
     @Test
     public void getPassWord() {

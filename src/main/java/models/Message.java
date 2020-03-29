@@ -1,3 +1,5 @@
+package models;
+
 import java.time.LocalDate;
 import java.util.*;
 
@@ -5,37 +7,18 @@ public abstract class Message {
     private User speaker;
     private String content;
     private LocalDate timeStamp;
-    private Map<String, String> reactions;
+    private Map<String, Integer> reactions;
 
     public Message() {
         this.reactions = new HashMap<>();
     }
 
-    public Message(User speaker, String content, LocalDate timeStamp, Map<String, String> reactions){
-        this.speaker = speaker;
-        this.content = content;
-        this.timeStamp = timeStamp;
-        this.reactions = reactions;
-    }
-
-    public Map<String, String> getReactions() {
+    public Map<String, Integer> getReactions() {
         return reactions;
     }
 
-    public void setReactions(Map<String, String> reactions) {
+    public void setReactions(Map<String, Integer> reactions) {
         this.reactions = reactions;
-    }
-
-    public void add(String reactionName, String reactionEmoji){
-        reactions.put(reactionName, reactionEmoji);
-    }
-
-    public void remove(String reactionName){
-        reactions.remove(reactionName);
-    }
-
-    public String lookup(String reactionName){
-        return reactions.get(reactionName);
     }
 
     public User getSpeaker() {

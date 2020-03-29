@@ -1,17 +1,12 @@
+package models;
+
 public class User {
     private String userId;
-    private String passWord;
+    private String password;
     private String email;
     private String name;
 
     public User() {
-    }
-
-    public User(String userId, String passWord, String email, String name) {
-        this.userId = userId;
-        this.passWord = passWord;
-        this.email = email;
-        this.name = name;
     }
 
     public String getUserId() {
@@ -23,11 +18,11 @@ public class User {
     }
 
     public String getPassWord() {
-        return passWord;
+        return password;
     }
 
     public void setPassWord(String passWord) {
-        this.passWord = passWord;
+        this.password = passWord;
     }
 
     public String getEmail() {
