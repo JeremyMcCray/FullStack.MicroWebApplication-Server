@@ -9,7 +9,7 @@ import java.util.List;
 public class MainMessageTest {
 
     @Test
-    public void replyTest(){
+    public void get_and_set_replyTest(){
         List<Reply> rep = new ArrayList<>();
         rep.add(new Reply());
         rep.add(new Reply());
