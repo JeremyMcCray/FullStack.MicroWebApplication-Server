@@ -1,4 +1,4 @@
-package models;
+package com.zipcoder.puppychat.models;
 
 public class User {
     private String userId;
