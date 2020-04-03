@@ -3,12 +3,11 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@Table(name="chat_abstract")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@Table(name="chat_abstract")
 public abstract class ChatSpace {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY )
     private int id;
 
     @ManyToMany
