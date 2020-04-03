@@ -6,7 +6,6 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name = "channel")
 public class Channel extends ChatSpace {
 
     private String name;
