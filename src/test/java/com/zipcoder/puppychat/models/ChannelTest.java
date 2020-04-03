@@ -1,8 +1,6 @@
-package models;
+package com.zipcoder.puppychat.models;
 
-import models.Channel;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;

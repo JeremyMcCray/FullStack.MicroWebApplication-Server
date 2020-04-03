@@ -1,4 +1,4 @@
-package models;
+package com.zipcoder.puppychat.models;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,14 +9,14 @@ public class UserTest {
 
     @Before
     public void setUp(){
-        user.setUserId("John198");
+        user.setId(98);
         user.setPassWord("PassW0rd");
         user.setEmail("john@email.com");
-        user.setName("John Wick");
+        user.setDisplayName("John Wick");
     }
 
     @Test
-    public void getUserId() { Assert.assertEquals("John198",user.getUserId()); }
+    public void getUserId() { Assert.assertEquals("John198",user.getId()); }
 
     @Test
     public void getPassWord() {
@@ -30,13 +30,13 @@ public class UserTest {
 
     @Test
     public void getName() {
-        Assert.assertEquals("John Wick",user.getName());
+        Assert.assertEquals("John Wick",user.getDisplayName());
     }
 
     @Test
     public void setUserId() {
-        user.setUserId("James007");
-        Assert.assertEquals("James007",user.getUserId());
+        user.setId(100);
+        Assert.assertEquals(100,user.getId());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class UserTest {
 
     @Test
     public void setName() {
-        user.setName("James Bond");
-        Assert.assertEquals("James Bond",user.getName());
+        user.setDisplayName("James Bond");
+        Assert.assertEquals("James Bond",user.getDisplayName());
     }
 }

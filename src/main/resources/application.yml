@@ -1,0 +1,20 @@
+
+#default profile
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: url.thats.wrong.on.purpose
+    platform: invalid.platform
+    continue-on-error: true
+
+
+logging:
+  level:
+    org:
+      springframework:
+        boot:
+          context:
+            embedded: INFO

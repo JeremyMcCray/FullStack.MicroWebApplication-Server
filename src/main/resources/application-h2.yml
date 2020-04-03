@@ -1,0 +1,6 @@
+#h2 profile
+spring:
+  profiles: h2
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MYSQL
+    platform: h2
