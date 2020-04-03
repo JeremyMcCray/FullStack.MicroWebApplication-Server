@@ -5,13 +5,14 @@ import java.util.List;
 @Entity
 @Table(name="user")
 public class User{
-
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
-    private String id;
+    private int id;
+    @Column(nullable = false)
     private String password;
     private String email;
-    private String name;
+    private String userName;
+    private String displayName;
 
     @ManyToMany
     private List<Channel> subscribedChannels;
@@ -21,11 +22,11 @@ public class User{
 
     public User() { }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -45,11 +46,43 @@ public class User{
         this.email = email;
     }
 
-    public String getName() {
-        return name;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDisplayName(String name) {
+        this.displayName = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public List<Channel> getSubscribedChannels() {
+        return subscribedChannels;
+    }
+
+    public void setSubscribedChannels(List<Channel> subscribedChannels) {
+        this.subscribedChannels = subscribedChannels;
+    }
+
+    public List<Channel> getManagedChannels() {
+        return managedChannels;
+    }
+
+    public void setManagedChannels(List<Channel> managedChannels) {
+        this.managedChannels = managedChannels;
     }
 }

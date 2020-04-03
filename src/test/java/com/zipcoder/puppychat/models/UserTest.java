@@ -9,10 +9,10 @@ public class UserTest {
 
     @Before
     public void setUp(){
-        user.setId("John198");
+        user.setId(98);
         user.setPassWord("PassW0rd");
         user.setEmail("john@email.com");
-        user.setName("John Wick");
+        user.setDisplayName("John Wick");
     }
 
     @Test
@@ -30,13 +30,13 @@ public class UserTest {
 
     @Test
     public void getName() {
-        Assert.assertEquals("John Wick",user.getName());
+        Assert.assertEquals("John Wick",user.getDisplayName());
     }
 
     @Test
     public void setUserId() {
-        user.setId("James007");
-        Assert.assertEquals("James007",user.getId());
+        user.setId(100);
+        Assert.assertEquals(100,user.getId());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class UserTest {
 
     @Test
     public void setName() {
-        user.setName("James Bond");
-        Assert.assertEquals("James Bond",user.getName());
+        user.setDisplayName("James Bond");
+        Assert.assertEquals("James Bond",user.getDisplayName());
     }
 }

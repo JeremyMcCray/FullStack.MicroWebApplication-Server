@@ -1,0 +1,7 @@
+#prod profile
+spring:
+  profiles: prod
+  datasource:
+    url: puppychatdb.cshychaanbiw.us-east-2.rds.amazonaws.com
+    username: puppy
+    password: PuppyChatUser123
