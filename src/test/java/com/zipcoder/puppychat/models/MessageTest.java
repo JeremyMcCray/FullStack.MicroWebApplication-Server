@@ -11,27 +11,27 @@ public class MessageTest {
     @Test
     public void getReactions() {
         Message m1 = new MainMessage();
-        String reactionName = "Happy";
+        Emoji e = new Emoji();
         int reactionCount = 3;
 
-        m1.getReactions().put(reactionName, reactionCount);
-        Map<String, Integer> expected = m1.getReactions();
+        m1.getReactionsCount().put(e, reactionCount);
+        Map<Emoji, Integer> expected = m1.getReactionsCount();
 
         Assert.assertEquals(1,expected.size());
-        Assert.assertTrue(expected.containsKey(reactionName));
+        Assert.assertTrue(expected.containsKey(e));
     }
 
     @Test
     public void setReaction() {
         Message m1 = new MainMessage();
-        String reactionName = "Happy";
+        Emoji e = new Emoji();
         int reactionCount = 3;
 
-        Map<String, Integer> m = new HashMap<>();
-        m.put(reactionName,reactionCount);
+        Map<Emoji, Integer> m = new HashMap<>();
+        m.put(e,reactionCount);
 
-        m1.setReactions(m);
-        Assert.assertEquals(m,m1.getReactions());
+        m1.setReactionsCount(m);
+        Assert.assertEquals(m,m1.getReactionsCount());
     }
 
 

@@ -1,20 +1,32 @@
 package com.zipcoder.puppychat.models;
+import javax.persistence.*;
+import java.util.List;
 
-public class User {
-    private String userId;
+@Entity
+@Table(name="user")
+public class User{
+
+    @Id
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
+    private String id;
     private String password;
     private String email;
     private String name;
 
-    public User() {
+    @ManyToMany
+    private List<Channel> subscribedChannels;
+
+    @ManyToMany(mappedBy = "admins")
+    private List<Channel> managedChannels;
+
+    public User() { }
+
+    public String getId() {
+        return id;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getPassWord() {

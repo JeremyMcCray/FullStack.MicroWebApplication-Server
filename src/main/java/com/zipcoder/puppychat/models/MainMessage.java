@@ -1,10 +1,12 @@
 package com.zipcoder.puppychat.models;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@Entity
 public class MainMessage extends Message {
 
+    @OneToMany
     private List<Reply> replies;
 
     public MainMessage() {
