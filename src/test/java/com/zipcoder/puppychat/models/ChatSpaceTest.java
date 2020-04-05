@@ -17,13 +17,13 @@ public class ChatSpaceTest {
     }
 
     @Test
-    public void setUserId() {
+    public void setId() {
         c1.setId(50);
         Assert.assertEquals(50,c1.getId());
     }
 
     @Test
-    public void getUserId() { Assert.assertEquals(89,c1.getId()); }
+    public void getId() { Assert.assertEquals(89,c1.getId()); }
 
     @Test
     public void testMember(){

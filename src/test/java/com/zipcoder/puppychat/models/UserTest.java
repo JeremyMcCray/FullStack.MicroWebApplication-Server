@@ -3,6 +3,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserTest {
 
     User user = new User();
@@ -56,4 +59,35 @@ public class UserTest {
         user.setDisplayName("James Bond");
         Assert.assertEquals("James Bond",user.getDisplayName());
     }
+
+    @Test
+    public void get_setUserName() {
+        user.setUserName("Bond007");
+        Assert.assertEquals("Bond007",user.getUserName());
+    }
+
+    @Test
+    public void get_and_set_SubscribedChannels() {
+
+        List<Channel> subscribedChannels = new ArrayList<>();
+        subscribedChannels.add(new Channel());
+        subscribedChannels.add(new Channel());
+
+        User user = new User();
+        user.setSubscribedChannels(subscribedChannels);
+        Assert.assertEquals(subscribedChannels, user.getSubscribedChannels());
+    }
+
+    @Test
+    public void get_and_set_ManagedChannels() {
+
+        List<Channel> managedChannels = new ArrayList<>();
+        managedChannels.add(new Channel());
+        managedChannels.add(new Channel());
+
+        User user = new User();
+        user.setManagedChannels(managedChannels);
+        Assert.assertEquals(managedChannels, user.getManagedChannels());
+    }
+
 }
