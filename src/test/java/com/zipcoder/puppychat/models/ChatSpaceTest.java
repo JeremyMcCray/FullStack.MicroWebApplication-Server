@@ -1,5 +1,6 @@
 package com.zipcoder.puppychat.models;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -7,6 +8,22 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ChatSpaceTest {
+
+    ChatSpace c1 = new Channel();
+
+    @Before
+    public void setUp() {
+       c1.setId(89);
+    }
+
+    @Test
+    public void setUserId() {
+        c1.setId(50);
+        Assert.assertEquals(50,c1.getId());
+    }
+
+    @Test
+    public void getUserId() { Assert.assertEquals(89,c1.getId()); }
 
     @Test
     public void testMember(){

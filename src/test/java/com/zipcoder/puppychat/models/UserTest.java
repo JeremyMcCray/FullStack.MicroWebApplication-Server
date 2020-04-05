@@ -16,7 +16,7 @@ public class UserTest {
     }
 
     @Test
-    public void getUserId() { Assert.assertEquals("John198",user.getId()); }
+    public void getUserId() { Assert.assertEquals(98,user.getId()); }
 
     @Test
     public void getPassWord() {
