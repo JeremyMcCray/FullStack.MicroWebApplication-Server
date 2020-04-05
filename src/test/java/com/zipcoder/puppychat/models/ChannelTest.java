@@ -8,6 +8,7 @@ import java.util.List;
 
 public class ChannelTest {
 
+
     @Test
     public void get_and_set_ChannelName() {
         // Given

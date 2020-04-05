@@ -9,5 +9,4 @@ class PuppyChatApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
