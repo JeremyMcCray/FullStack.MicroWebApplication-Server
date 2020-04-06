@@ -30,15 +30,21 @@ public class ChannelController {
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value="/all", method= RequestMethod.GET)
-    public ResponseEntity<Iterable<Channel>> getAllChannel() {
-        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
+    @RequestMapping(value="/all/admin/{userId}", method= RequestMethod.GET)
+    public ResponseEntity<Iterable<Channel>> getAllManagedChannels(@PathVariable int userId) {
+        return new ResponseEntity<>(service.findAllByAnAdmin(userId), HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/all/member/{userId}", method= RequestMethod.GET)
+    public ResponseEntity<Iterable<Channel>> getAllSubscribedChannel(@PathVariable int userId) {
+        return new ResponseEntity<>(service.findAllByAnAdmin(userId), HttpStatus.OK);
     }
 
     //=============== POST Mappings ===============//
-    @RequestMapping(value="/create", method= RequestMethod.POST)
-    public ResponseEntity<Channel> createChannel(@RequestBody Channel channel) {
-        return new ResponseEntity<>(service.create(channel), HttpStatus.OK);
+    @RequestMapping(value="/create/{userId}", method= RequestMethod.POST)
+    public ResponseEntity<Channel> createChannel(@RequestBody Channel channel, @PathVariable int userId) {
+
+        return new ResponseEntity<>(service.create(channel,userId), HttpStatus.OK);
     }
 
     //=============== PUT Mappings ===============//

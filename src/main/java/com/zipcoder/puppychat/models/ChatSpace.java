@@ -1,17 +1,20 @@
 package com.zipcoder.puppychat.models;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
+//@MappedSuperClass
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 //@Table(name="chat_abstract")
 public abstract class ChatSpace {
 
     @Id
+    @GeneratedValue
     private int id;
 
     @ManyToMany
-    private List<User> members;
+    private List<User> members = new ArrayList<>();
 
     public ChatSpace(){}
 

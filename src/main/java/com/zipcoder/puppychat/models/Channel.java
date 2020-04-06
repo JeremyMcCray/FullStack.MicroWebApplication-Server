@@ -2,6 +2,7 @@ package com.zipcoder.puppychat.models;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,7 +12,7 @@ public class Channel extends ChatSpace {
     private String topic;
 
     @ManyToMany
-    private List<User> admins;
+    private List<User> admins = new ArrayList<>();;
 
     public Channel() {}
 
