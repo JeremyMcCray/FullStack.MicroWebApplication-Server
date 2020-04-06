@@ -12,7 +12,6 @@ public class ChannelTest {
     Channel c = new Channel();
     List<User> admin = new ArrayList<>();
     String chatName = "chat";
-    String chatTopic = "just chat here!";
 
     @Before
     public void setUp(){
@@ -20,7 +19,6 @@ public class ChannelTest {
         admin.add(new User());
 
         c.setName(chatName);
-        c.setTopic(chatTopic);
         c.setAdmins(admin);
     }
 
@@ -34,10 +32,6 @@ public class ChannelTest {
         Assert.assertEquals(admin, c.getAdmins());
     }
 
-    @Test
-    public void get_and_set_Topic() {
-        Assert.assertEquals( chatTopic, c.getTopic()  );
-    }
 
 
 }
