@@ -30,20 +30,15 @@ public class UserService {
         return repository.save(user);
     }
 
-    public User update(int id, User info){
-        Optional<User> user = repository.findById(id);
-        return user.map(department -> {
-            info.setId(id);
-            repository.save(info);
-            return info;
-        }).orElse(null);
+    public User update(int id, User newInfo){
+        User existing = findById(id);
+        Util.copyNonNullProperties(newInfo, existing);
+        repository.save(existing);
+        return existing;
     }
 
-    public boolean delete(int id){
-        Optional<User> user = repository.findById(id);
-        return user.map( u -> {
-            repository.delete(u);
-            return true;
-        }).orElse(false);
+    public void delete(int id){
+        User user = findById(id);
+        repository.delete(user);
     }
 }

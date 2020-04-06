@@ -1,4 +1,5 @@
 package com.zipcoder.puppychat.services;
+import com.zipcoder.puppychat.error.NotFoundException;
 import com.zipcoder.puppychat.models.Emoji;
 import com.zipcoder.puppychat.repositories.EmojiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class EmojiService {
     };
 
     public Emoji findById(int id){
-        return repository.findById(id).orElse(null);
+        return repository.findById(id).orElseThrow(NotFoundException::new);
     }
 
     public Iterable<Emoji> findAll(){
