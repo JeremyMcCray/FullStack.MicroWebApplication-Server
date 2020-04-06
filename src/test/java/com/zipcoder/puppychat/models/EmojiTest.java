@@ -9,8 +9,20 @@ public class EmojiTest {
 
     @Before
     public void setUp(){
+        emoji.setId(1);
         emoji.setName("Happy");
         emoji.setImage(":)");
+    }
+
+    @Test
+    public void getId(){
+        Assert.assertEquals(1,emoji.getId());
+    }
+
+    @Test
+    public void setId() {
+        emoji.setId(99);
+        Assert.assertEquals(99,emoji.getId());
     }
 
     @Test
