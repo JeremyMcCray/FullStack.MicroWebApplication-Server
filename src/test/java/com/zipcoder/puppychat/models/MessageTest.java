@@ -8,6 +8,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MessageTest {
+
+    @Test
+    public void get_setId() {
+        Message m1 = new MainMessage();
+        m1.setId(50);
+        Assert.assertEquals(50,m1.getId());
+    }
+
     @Test
     public void getReactions() {
         Message m1 = new MainMessage();
