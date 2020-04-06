@@ -54,6 +54,7 @@ public class ChannelService {
     public void changeChannelName(int channelId, String newName){
         Channel existing = repository.findById(channelId).orElseThrow(NotFoundException::new);
         existing.setName(newName);
+        repository.save(existing);
     }
 
     //add new member to channel
@@ -61,6 +62,7 @@ public class ChannelService {
         Channel existing = repository.findById(channelId).orElseThrow(NotFoundException::new);
         User u = userRepository.findById(userId).orElseThrow(NotFoundException::new);
         existing.getMembers().add(u);
+        repository.save(existing);
     }
 
     //add new admin to channel
@@ -68,6 +70,7 @@ public class ChannelService {
         Channel existing = repository.findById(channelId).orElseThrow(NotFoundException::new);
         User u = userRepository.findById(userId).orElseThrow(NotFoundException::new);
         existing.getAdmins().add(u);
+        repository.save(existing);
     }
 
     //remove a member from channel
@@ -75,6 +78,7 @@ public class ChannelService {
         Channel existing = repository.findById(channelId).orElseThrow(NotFoundException::new);
         User u = userRepository.findById(userId).orElseThrow(NotFoundException::new);
         existing.getMembers().remove(u);
+        repository.save(existing);
     }
 
     //remove a admin from channel
@@ -82,6 +86,7 @@ public class ChannelService {
         Channel existing = repository.findById(channelId).orElseThrow(NotFoundException::new);
         User u = userRepository.findById(userId).orElseThrow(NotFoundException::new);
         existing.getAdmins().remove(u);
+        repository.save(existing);
     }
 
     //get all admin

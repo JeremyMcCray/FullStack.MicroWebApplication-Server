@@ -25,24 +25,24 @@ public class ChannelController {
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value="/allChannel/a/{userId}", method= RequestMethod.GET)
+    @RequestMapping(value="/all/a/{userId}", method= RequestMethod.GET)
     public ResponseEntity<Iterable<Channel>> getAllManagedChannels(@PathVariable int userId) {
         return new ResponseEntity<>(service.findAllByAnAdmin(userId), HttpStatus.OK);
     }
 
-    @RequestMapping(value="/allChannel/m/{userId}", method= RequestMethod.GET)
+    @RequestMapping(value="/all/m/{userId}", method= RequestMethod.GET)
     public ResponseEntity<Iterable<Channel>> getAllSubscribedChannel(@PathVariable int userId) {
         return new ResponseEntity<>(service.findAllByAMember(userId), HttpStatus.OK);
     }
 
-    @RequestMapping(value="/allAdmin/{channelId}", method= RequestMethod.GET)
+    @RequestMapping(value="/showAllAdmins/{channelId}", method= RequestMethod.GET)
     public ResponseEntity<Iterable<User>> getAllAdminsByChannel(@PathVariable int channelId) {
         return new ResponseEntity<>(service.listAllAdmins(channelId), HttpStatus.OK);
     }
 
-    @RequestMapping(value="/allMember/by/member/{userId}", method= RequestMethod.GET)
-    public ResponseEntity<Iterable<User>> getAllMembersByChannel(@PathVariable int userId) {
-        return new ResponseEntity<>(service.listAllMembers(userId), HttpStatus.OK);
+    @RequestMapping(value="/showAllMembers/{channelId}", method= RequestMethod.GET)
+    public ResponseEntity<Iterable<User>> getAllMembersByChannel(@PathVariable int channelId) {
+        return new ResponseEntity<>(service.listAllMembers(channelId), HttpStatus.OK);
     }
 
     //=============== POST Mappings ===============//
