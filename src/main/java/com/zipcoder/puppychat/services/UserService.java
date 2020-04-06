@@ -1,5 +1,6 @@
 package com.zipcoder.puppychat.services;
 
+import com.zipcoder.puppychat.error.NotFoundException;
 import com.zipcoder.puppychat.models.User;
 import com.zipcoder.puppychat.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class UserService {
     };
 
     public User findById(int id){
-        return repository.findById(id).orElse(null);
+        return repository.findById(id).orElseThrow(NotFoundException::new);
     }
 
     public Iterable<User> findAll(){
