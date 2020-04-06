@@ -13,9 +13,6 @@ public abstract class ChatSpace {
     @ManyToMany
     private List<User> members;
 
-    @ManyToMany
-    private List<MainMessage> messages;
-
     public ChatSpace(){}
 
     public int getId() { return id; }
@@ -28,14 +25,6 @@ public abstract class ChatSpace {
 
     public void setMembers(List<User> members) {
         this.members = members;
-    }
-
-    public List<MainMessage> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<MainMessage> message) {
-        this.messages = message;
     }
 
 

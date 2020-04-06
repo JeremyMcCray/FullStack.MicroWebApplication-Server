@@ -9,6 +9,9 @@ public class MainMessage extends Message {
     @OneToMany
     private List<Reply> replies;
 
+    @ManyToOne
+    private ChatSpace chatSpace;
+
     public MainMessage() {
         this.replies = new ArrayList<Reply>();
     }
@@ -21,4 +24,11 @@ public class MainMessage extends Message {
         this.replies = replies;
     }
 
+    public ChatSpace getChatSpace() {
+        return chatSpace;
+    }
+
+    public void setChatSpace(ChatSpace chatSpace) {
+        this.chatSpace = chatSpace;
+    }
 }
