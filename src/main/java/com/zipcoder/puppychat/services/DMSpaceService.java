@@ -1,6 +1,8 @@
 package com.zipcoder.puppychat.services;
 
+import com.zipcoder.puppychat.error.NotFoundException;
 import com.zipcoder.puppychat.models.DMSpace;
+import com.zipcoder.puppychat.models.Emoji;
 import com.zipcoder.puppychat.repositories.DMSpaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,7 @@ public class DMSpaceService {
     }
 
     public DMSpace findById(int id){
-        return repository.findById(id).orElse(null);
+        return repository.findById(id).orElseThrow(NotFoundException::new);
     }
 
     public Iterable<DMSpace> findAll(){
@@ -28,20 +30,16 @@ public class DMSpaceService {
         return repository.save(space);
     }
 
-    public DMSpace update(int id, DMSpace info){
-        Optional<DMSpace> dmSpace = repository.findById(id);
-        return dmSpace.map(department -> {
-            info.setId(id);
-            repository.save(info);
-            return info;
-        }).orElse(null);
+    public DMSpace update(int id, DMSpace newInfo){
+        Optional<DMSpace> DMSpace = repository.findById(id);
+        DMSpace existing = findById(id);
+        Util.copyNonNullProperties(newInfo, existing);
+        repository.save(existing);
+        return existing;
     }
 
-    public boolean delete(int id){
-        Optional<DMSpace> dmSpace = repository.findById(id);
-        return dmSpace.map( ds -> {
-            repository.delete(ds);
-            return true;
-        }).orElse(false);
+    public void delete(int id){
+        DMSpace DMSpace = findById(id);
+        repository.delete(DMSpace);
     }
 }

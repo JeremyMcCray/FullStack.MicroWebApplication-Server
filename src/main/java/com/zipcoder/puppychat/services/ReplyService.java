@@ -1,4 +1,6 @@
 package com.zipcoder.puppychat.services;
+import com.zipcoder.puppychat.error.NotFoundException;
+import com.zipcoder.puppychat.models.Emoji;
 import com.zipcoder.puppychat.models.Reply;
 import com.zipcoder.puppychat.repositories.ReplyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,7 @@ public class ReplyService {
         this.repository = repository;
     };
 
-    public Reply findById(int id){
-        return repository.findById(id).orElse(null);
+    public Reply findById(int id){return repository.findById(id).orElseThrow(NotFoundException::new);
     }
 
     public Iterable<Reply> findAll(){
@@ -27,20 +28,16 @@ public class ReplyService {
         return repository.save(reply);
     }
 
-    public Reply update(int id, Reply info){
+    public Reply update(int id, Reply newInfo){
         Optional<Reply> reply = repository.findById(id);
-        return reply.map(department -> {
-            info.setId(id);
-            repository.save(info);
-            return info;
-        }).orElse(null);
+        Reply existing = findById(id);
+        Util.copyNonNullProperties(newInfo, existing);
+        repository.save(existing);
+        return existing;
     }
 
-    public boolean delete(int id){
-        Optional<Reply> reply = repository.findById(id);
-        return reply.map( re -> {
-            repository.delete(re);
-            return true;
-        }).orElse(false);
+    public void delete(int id){
+        Reply reply = findById(id);
+        repository.delete(reply);
     }
 }

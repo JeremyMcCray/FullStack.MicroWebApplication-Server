@@ -17,11 +17,15 @@ public class UserController {
     @Autowired
     public UserController(UserService service){ this.service = service; }
 
-
     //=============== GET Mappings ===============//
     @RequestMapping(value="/{id}", method= RequestMethod.GET)
     public ResponseEntity<User> getUser(@PathVariable int id) {
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/all", method= RequestMethod.GET)
+    public ResponseEntity<Iterable<User>> getAllUser() {
+        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
     //=============== POST Mappings ===============//

@@ -28,20 +28,16 @@ public class EmojiService {
         return repository.save(emoji);
     }
 
-    public Emoji update(int id, Emoji info){
+    public Emoji update(int id, Emoji newInfo){
         Optional<Emoji> emoji = repository.findById(id);
-        return emoji.map(department -> {
-            info.setId(id);
-            repository.save(info);
-            return info;
-        }).orElse(null);
+        Emoji existing = findById(id);
+        Util.copyNonNullProperties(newInfo, existing);
+        repository.save(existing);
+        return existing;
     }
 
-    public boolean delete(int id){
-        Optional<Emoji> emoji = repository.findById(id);
-        return emoji.map( em -> {
-            repository.delete(em);
-            return true;
-        }).orElse(false);
+    public void delete(int id){
+        Emoji emoji = findById(id);
+        repository.delete(emoji);
     }
 }

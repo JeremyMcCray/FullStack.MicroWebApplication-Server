@@ -1,6 +1,8 @@
 package com.zipcoder.puppychat.services;
 
+import com.zipcoder.puppychat.error.NotFoundException;
 import com.zipcoder.puppychat.models.Channel;
+import com.zipcoder.puppychat.models.Emoji;
 import com.zipcoder.puppychat.repositories.ChannelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,7 @@ public class ChannelService {
     };
 
     public Channel findById(int id){
-        return repository.findById(id).orElse(null);
+        return repository.findById(id).orElseThrow(NotFoundException::new);
     }
 
     public Iterable<Channel> findAll(){
@@ -28,21 +30,17 @@ public class ChannelService {
         return repository.save(channel);
     }
 
-    public Channel update(int id, Channel info){
+    public Channel update(int id, Channel newInfo){
         Optional<Channel> channel = repository.findById(id);
-        return channel.map(department -> {
-            info.setId(id);
-            repository.save(info);
-            return info;
-        }).orElse(null);
+        Channel existing = findById(id);
+        Util.copyNonNullProperties(newInfo, existing);
+        repository.save(existing);
+        return existing;
     }
 
-    public boolean delete(int id){
-        Optional<Channel> channel = repository.findById(id);
-        return channel.map( ch -> {
-            repository.delete(ch);
-            return true;
-        }).orElse(false);
+    public void delete(int id){
+        Channel channel = findById(id);
+        repository.delete(channel);
     }
 
 }
