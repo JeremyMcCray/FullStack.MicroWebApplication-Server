@@ -6,10 +6,19 @@ import javax.persistence.Id;
 @Entity
 public class Emoji {
     @Id
+    int id;
     String name;
     String image;
 
     public Emoji(){}
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
