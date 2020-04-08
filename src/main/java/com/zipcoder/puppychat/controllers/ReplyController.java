@@ -17,30 +17,30 @@ public class ReplyController {
     }
 
     //=============== GET Mappings ===============//
-    @RequestMapping(value="/{id}", method= RequestMethod.GET)
+    @GetMapping("/{id}")
     public ResponseEntity<Reply> getReply(@PathVariable int id) {
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value="/all", method= RequestMethod.GET)
+    @GetMapping("/all")
     public ResponseEntity<Iterable<Reply>> getAllReply() {
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
     //=============== POST Mappings ===============//
-    @RequestMapping(value="/create", method= RequestMethod.POST)
+    @PostMapping("/create")
     public ResponseEntity<Reply> createReply(@RequestBody Reply reply) {
         return new ResponseEntity<>(service.create(reply), HttpStatus.OK);
     }
 
     //=============== PUT Mappings ===============//
-    @RequestMapping(value="/{id}", method= RequestMethod.PUT)
+    @PutMapping("/{id}")
     public ResponseEntity<Reply> updateReply(@PathVariable int id, @RequestBody Reply reply) {
         return new ResponseEntity<>(service.update(id,reply), HttpStatus.OK);
     }
 
     //=============== DELETE Mappings ===============//
-    @RequestMapping(value="/{id}", method= RequestMethod.DELETE)
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteReply(@PathVariable int id) {
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);

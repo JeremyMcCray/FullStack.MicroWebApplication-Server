@@ -18,30 +18,30 @@ public class UserController {
     public UserController(UserService service){ this.service = service; }
 
     //=============== GET Mappings ===============//
-    @RequestMapping(value="/{id}", method= RequestMethod.GET)
+    @GetMapping("/{id}")
     public ResponseEntity<User> getUser(@PathVariable int id) {
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value="/all", method= RequestMethod.GET)
+    @GetMapping("/all")
     public ResponseEntity<Iterable<User>> getAllUser() {
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
     //=============== POST Mappings ===============//
-    @RequestMapping(value="/create", method= RequestMethod.POST)
+    @PostMapping("/create")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         return new ResponseEntity<>(service.create(user), HttpStatus.OK);
     }
 
     //=============== PUT Mappings ===============//
-    @RequestMapping(value="/{id}", method= RequestMethod.PUT)
+    @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user) {
         return new ResponseEntity<>(service.update(id,user), HttpStatus.OK);
     }
 
     //=============== DELETE Mappings ===============//
-    @RequestMapping(value="/{id}", method= RequestMethod.DELETE)
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable int id) {
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
