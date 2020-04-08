@@ -13,7 +13,7 @@ public class UserTest {
     @Before
     public void setUp(){
         user.setId(98);
-        user.setPassWord("PassW0rd");
+        user.setPassword("PassW0rd");
         user.setEmail("john@email.com");
         user.setDisplayName("John Wick");
     }
@@ -23,7 +23,7 @@ public class UserTest {
 
     @Test
     public void getPassWord() {
-        Assert.assertEquals("PassW0rd",user.getPassWord());
+        Assert.assertEquals("PassW0rd",user.getPassword());
     }
 
     @Test
@@ -44,8 +44,8 @@ public class UserTest {
 
     @Test
     public void setPassWord() {
-        user.setPassWord("Pa55word");
-        Assert.assertEquals("Pa55word",user.getPassWord());
+        user.setPassword("Pa55word");
+        Assert.assertEquals("Pa55word",user.getPassword());
     }
 
     @Test

@@ -8,6 +8,7 @@ import java.util.List;
 
 public class MainMessageTest {
 
+
     @Test
     public void get_and_set_replyTest(){
         List<Reply> rep = new ArrayList<>();
@@ -21,6 +22,14 @@ public class MainMessageTest {
         Assert.assertEquals(rep, mm.getReplies());
     }
 
+    @Test
+    public void get_and_set_chatSpaceTest(){
+        ChatSpace cs = new Channel();
+        MainMessage mm = new MainMessage();
+        mm.setChatSpace(cs);
+
+        Assert.assertEquals(cs, mm.getChatSpace());
+    }
 
 }
 

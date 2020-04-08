@@ -1,4 +1,5 @@
 package com.zipcoder.puppychat.services;
+import com.zipcoder.puppychat.error.NotFoundException;
 import com.zipcoder.puppychat.models.Emoji;
 import com.zipcoder.puppychat.repositories.EmojiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class EmojiService {
     };
 
     public Emoji findById(int id){
-        return repository.findById(id).orElse(null);
+        return repository.findById(id).orElseThrow(NotFoundException::new);
     }
 
     public Iterable<Emoji> findAll(){
@@ -27,20 +28,16 @@ public class EmojiService {
         return repository.save(emoji);
     }
 
-    public Emoji update(int id, Emoji info){
+    public Emoji update(int id, Emoji newInfo){
         Optional<Emoji> emoji = repository.findById(id);
-        return emoji.map(department -> {
-            info.setId(id);
-            repository.save(info);
-            return info;
-        }).orElse(null);
+        Emoji existing = findById(id);
+        Util.copyNonNullProperties(newInfo, existing);
+        repository.save(existing);
+        return existing;
     }
 
-    public boolean delete(int id){
-        Optional<Emoji> emoji = repository.findById(id);
-        return emoji.map( em -> {
-            repository.delete(em);
-            return true;
-        }).orElse(false);
+    public void delete(int id){
+        Emoji emoji = findById(id);
+        repository.delete(emoji);
     }
 }
