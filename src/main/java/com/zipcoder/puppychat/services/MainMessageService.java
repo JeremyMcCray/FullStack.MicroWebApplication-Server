@@ -1,5 +1,7 @@
 package com.zipcoder.puppychat.services;
 
+import com.zipcoder.puppychat.error.NotFoundException;
+import com.zipcoder.puppychat.models.Emoji;
 import com.zipcoder.puppychat.models.MainMessage;
 import com.zipcoder.puppychat.repositories.MainMessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,8 @@ public class MainMessageService {
     };
 
     public MainMessage findById(int id){
-        return repository.findById(id).orElse(null);
+
+        return repository.findById(id).orElseThrow(NotFoundException::new);
     }
 
     public Iterable<MainMessage> findAll(){
@@ -29,20 +32,16 @@ public class MainMessageService {
         return repository.save(channel);
     }
 
-    public MainMessage update(int id, MainMessage info){
+    public MainMessage update(int id, MainMessage newInfo){
         Optional<MainMessage> mainMessage = repository.findById(id);
-        return mainMessage.map(department -> {
-            info.setId(id);
-            repository.save(info);
-            return info;
-        }).orElse(null);
+        MainMessage existing = findById(id);
+        Util.copyNonNullProperties(newInfo, existing);
+        repository.save(existing);
+        return existing;
     }
 
-    public boolean delete(int id){
-        Optional<MainMessage> mainMessage = repository.findById(id);
-        return mainMessage.map( mm -> {
-            repository.delete(mm);
-            return true;
-        }).orElse(false);
+    public void delete(int id){
+        MainMessage mainMessage = findById(id);
+        repository.delete(mainMessage);
     }
 }

@@ -39,18 +39,5 @@ public class ChatSpaceTest {
         Assert.assertEquals(3,cs.getMembers().size());
     }
 
-    @Test
-    public void testMessageList(){
-        List<MainMessage> msg = new ArrayList<>();
-        msg.add(new MainMessage());
-        msg.add(new MainMessage());
-        msg.add(new MainMessage());
-
-        ChatSpace cs = new DMSpace();
-        cs.setMessages(msg);
-
-        Assert.assertEquals(msg, cs.getMessages());
-    }
-
 
 }

@@ -1,9 +1,10 @@
 package com.zipcoder.puppychat.models;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="user")
 public class User{
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
@@ -14,13 +15,15 @@ public class User{
     private String userName;
     private String displayName;
 
+    @JsonIgnore
     @ManyToMany
     private List<Channel> subscribedChannels;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "admins")
     private List<Channel> managedChannels;
 
-    public User() { }
+    public User(){ }
 
     public int getId() {
         return id;
@@ -30,12 +33,12 @@ public class User{
         this.id = id;
     }
 
-    public String getPassWord() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassWord(String passWord) {
-        this.password = passWord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -46,20 +49,20 @@ public class User{
         this.email = email;
     }
 
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String name) {
-        this.displayName = name;
-    }
-
     public String getUserName() {
         return userName;
     }
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     public List<Channel> getSubscribedChannels() {
