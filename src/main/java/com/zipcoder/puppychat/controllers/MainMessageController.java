@@ -21,7 +21,7 @@ public class MainMessageController {
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/all/{id}")
+    @GetMapping("/allByUser/{id}")
     public ResponseEntity<Iterable<MainMessage>> getAllMessageByUser(@PathVariable int id){
         return new ResponseEntity<>(service.findAllByUser(id), HttpStatus.OK);
     }
