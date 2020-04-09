@@ -1,6 +1,7 @@
 package com.zipcoder.puppychat.controllers;
 
 import com.zipcoder.puppychat.models.DMSpace;
+import com.zipcoder.puppychat.models.User;
 import com.zipcoder.puppychat.services.DMSpaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -18,30 +19,36 @@ public class DMSpaceController {
     }
 
     //=============== GET Mappings ===============//
-    @RequestMapping(value="/{id}", method= RequestMethod.GET)
+    @GetMapping("/{id}")
     public ResponseEntity<DMSpace> getDMSpace(@PathVariable int id) {
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value="/all", method= RequestMethod.GET)
-    public ResponseEntity<Iterable<DMSpace>> getAllDMSpace() {
-        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
+    @GetMapping("/allByUser/{userId}")
+    public ResponseEntity<Iterable<DMSpace>> getAllDMSpaceByUser(@PathVariable int userId) {
+        return new ResponseEntity<>(service.findAllByAMember(userId), HttpStatus.OK);
+    }
+
+    @GetMapping("/allMember/{id}")
+    public ResponseEntity<Iterable<User>> listAllMembers(@PathVariable int id) {
+        return new ResponseEntity<>(service.listAllMembers(id), HttpStatus.OK);
     }
 
     //=============== POST Mappings ===============//
-    @RequestMapping(value="/create", method= RequestMethod.POST)
-    public ResponseEntity<DMSpace> createDMSpace(@RequestBody DMSpace dmSpace) {
-        return new ResponseEntity<>(service.create(dmSpace), HttpStatus.OK);
+    @PostMapping("/{userId}/{targetUserId}")
+    public ResponseEntity<DMSpace> createDMSpace(@PathVariable int userId, @PathVariable int targetUserId) {
+        return new ResponseEntity<>(service.create(userId,targetUserId), HttpStatus.OK);
     }
 
     //=============== PUT Mappings ===============//
-    @RequestMapping(value="/{id}", method= RequestMethod.PUT)
-    public ResponseEntity<DMSpace> updateDMSpace(@PathVariable int id, @RequestBody DMSpace dmSpace) {
-        return new ResponseEntity<>(service.update(id,dmSpace), HttpStatus.OK);
+    @PutMapping("add/{userId}/to/{dmSpaceId}")
+    public ResponseEntity<DMSpace> addMemberToDMSpace(@PathVariable int dmSpaceId, @PathVariable int userId) {
+        service.addMember(dmSpaceId,userId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //=============== DELETE Mappings ===============//
-    @RequestMapping(value="/{id}", method= RequestMethod.DELETE)
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDMSpace(@PathVariable int id) {
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);

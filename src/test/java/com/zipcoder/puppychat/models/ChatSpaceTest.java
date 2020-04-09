@@ -3,9 +3,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class ChatSpaceTest {
 
@@ -27,7 +25,7 @@ public class ChatSpaceTest {
 
     @Test
     public void testMember(){
-        List<User> memberList = new ArrayList<>();
+        Set<User> memberList = new HashSet<>();
         memberList.add(new User());
         memberList.add(new User());
         memberList.add(new User());

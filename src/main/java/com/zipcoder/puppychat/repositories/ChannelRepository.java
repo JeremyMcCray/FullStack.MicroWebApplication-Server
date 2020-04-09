@@ -10,5 +10,4 @@ public interface ChannelRepository extends JpaRepository<Channel,Integer> {
     //derived query
     Iterable<Channel> findChannelsByAdmins(User user);
     Iterable<Channel> findChannelsByMembers(User user);
-
 }

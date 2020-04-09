@@ -1,7 +1,7 @@
 package com.zipcoder.puppychat.models;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 //@MappedSuperClass
 @Entity
@@ -14,7 +14,7 @@ public abstract class ChatSpace {
     private int id;
 
     @ManyToMany
-    private List<User> members = new ArrayList<>();
+    private Set<User> members = new HashSet<>();
 
     public ChatSpace(){}
 
@@ -22,11 +22,11 @@ public abstract class ChatSpace {
 
     public void setId(int id) { this.id = id; }
 
-    public List<User> getMembers() {
+    public Set<User> getMembers() {
         return members;
     }
 
-    public void setMembers(List<User> members) {
+    public void setMembers(Set<User> members) {
         this.members = members;
     }
 

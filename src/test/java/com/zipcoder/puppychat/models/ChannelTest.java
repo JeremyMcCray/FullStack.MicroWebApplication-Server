@@ -4,13 +4,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ChannelTest {
 
     Channel c = new Channel();
-    List<User> admin = new ArrayList<>();
+    Set<User> admin = new HashSet<>();
     String chatName = "chat";
 
     @Before

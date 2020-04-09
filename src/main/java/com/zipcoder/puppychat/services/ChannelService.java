@@ -8,8 +8,6 @@ import com.zipcoder.puppychat.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class ChannelService {
     ChannelRepository repository;
@@ -37,8 +35,8 @@ public class ChannelService {
 
     public Channel create(Channel newChannel, int userId){
         User u = userRepository.findById(userId).orElseThrow(NotFoundException::new);
-        newChannel.getAdmins().add(u);
-        newChannel.getMembers().add(u);
+        newChannel.getAdmins().add(u);// add self
+        newChannel.getMembers().add(u);// add self
         return repository.save(newChannel);
     }
 
