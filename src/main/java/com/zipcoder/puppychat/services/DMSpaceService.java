@@ -43,15 +43,15 @@ public class DMSpaceService {
 
     //add new member to space
     public void addMember(int spaceId, int userId){
-        DMSpace existing = repository.findById(spaceId).orElseThrow(NotFoundException::new);
+        DMSpace existing = findById(spaceId);
         User u = userRepository.findById(userId).orElseThrow(NotFoundException::new);
         existing.getMembers().add(u);
         repository.save(existing);
     }
 
     //get all members
-    public Iterable<User> listAllMembers(int channelId){
-        DMSpace existing = repository.findById(channelId).orElseThrow(NotFoundException::new);
+    public Iterable<User> listAllMembers(int spaceId){
+        DMSpace existing = findById(spaceId);
         return existing.getMembers();
     }
 

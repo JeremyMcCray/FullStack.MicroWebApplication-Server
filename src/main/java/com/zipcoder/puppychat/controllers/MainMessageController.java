@@ -1,13 +1,14 @@
 package com.zipcoder.puppychat.controllers;
 
 import com.zipcoder.puppychat.models.MainMessage;
+import com.zipcoder.puppychat.models.Reply;
 import com.zipcoder.puppychat.services.MainMessageService;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/message")
+@RequestMapping("/msg")
 public class MainMessageController {
     MainMessageService service;
 
@@ -25,21 +26,42 @@ public class MainMessageController {
     public ResponseEntity<Iterable<MainMessage>> getAllMessageByUser(@PathVariable int id){
         return new ResponseEntity<>(service.findAllByUser(id), HttpStatus.OK);
     }
-//    @RequestMapping(value="/all", method= RequestMethod.GET)
-//    public ResponseEntity<Iterable<MainMessage>> getAllMsg() {
-//        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
-//    }
+
+    @GetMapping("/allByChannel/{id}")
+    public ResponseEntity<Iterable<MainMessage>> getAllMessageByChannel(@PathVariable int id){
+        return new ResponseEntity<>(service.findAllByChannel(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/allByDm/{id}")
+    public ResponseEntity<Iterable<MainMessage>> getAllMessageByDM(@PathVariable int id){
+        return new ResponseEntity<>(service.findAllByDM(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/listAllReply/{id}")
+    public ResponseEntity<Iterable<Reply>> listAllReplies(@PathVariable int id){
+        return new ResponseEntity<>(service.listAllReplies(id), HttpStatus.OK);
+    }
 
     //=============== POST Mappings ===============//
-    @PostMapping("/create")
-    public ResponseEntity<MainMessage> createMsg(@RequestBody MainMessage msg) {
-        return new ResponseEntity<>(service.create(msg), HttpStatus.OK);
+    @PostMapping("/{userId}")
+    public ResponseEntity<MainMessage> createMsg(@PathVariable int userId, @PathVariable int chatId,  @RequestBody String content) {
+        return new ResponseEntity<>(service.create(userId, chatId, content), HttpStatus.OK);
     }
 
     //=============== PUT Mappings ===============//
     @PutMapping("/{id}")
-    public ResponseEntity<MainMessage> updateMsg(@PathVariable int id, @RequestBody MainMessage msg) {
-        return new ResponseEntity<>(service.update(id,msg), HttpStatus.OK);
+    public ResponseEntity<MainMessage> updateMsgContent(@PathVariable int id, @RequestBody String content) {
+        return new ResponseEntity<>(service.updateMessageContent(id,content), HttpStatus.OK);
+    }
+
+    @PutMapping("react/{msgId}/with/{emojiId}")
+    public ResponseEntity<MainMessage> reactWithEmoji(@PathVariable int msgId, @PathVariable int emojiId) {
+        return new ResponseEntity<>(service.reactWithEmoji(msgId,emojiId), HttpStatus.OK);
+    }
+
+    @PutMapping("add/{emojiId}/to/{msgId}")
+    public ResponseEntity<MainMessage> addEmojiCount(@PathVariable int msgId, @PathVariable int emojiId) {
+        return new ResponseEntity<>(service.addEmojiCount(msgId,emojiId), HttpStatus.OK);
     }
 
     //=============== DELETE Mappings ===============//

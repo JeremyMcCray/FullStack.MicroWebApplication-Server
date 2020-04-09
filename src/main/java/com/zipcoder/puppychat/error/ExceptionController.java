@@ -12,4 +12,9 @@ public class ExceptionController{
         return new ResponseEntity<>("Oops!! Resource Not found!", HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(value = DuplicateDataException.class)
+    public ResponseEntity<String> handleDupe(){
+        return new ResponseEntity<>("You can't do that because the data is already there", HttpStatus.CONFLICT);
+    }
+
 }

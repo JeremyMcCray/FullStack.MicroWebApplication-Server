@@ -46,15 +46,15 @@ public class ChannelController {
     }
 
     //=============== POST Mappings ===============//
-    @PostMapping("/create/{userId}")
-    public ResponseEntity<Channel> createChannel(@RequestBody Channel channel, @PathVariable int userId) {
-        return new ResponseEntity<>(service.create(channel,userId), HttpStatus.OK);
+    @PostMapping("/{userId}")
+    public ResponseEntity<Channel> createChannel(@PathVariable int userId, @RequestBody String name) {
+        return new ResponseEntity<>(service.create(userId, name), HttpStatus.OK);
     }
 
     //=============== PUT Mappings ===============//
-    @PutMapping("/{id}/{newName}")
-    public ResponseEntity<Void> updateChannelName(@PathVariable int id, @PathVariable String newName) {
-        service.changeChannelName(id,newName);
+    @PutMapping("/changeName/{id}")
+    public ResponseEntity<Void> updateChannelName(@PathVariable int id, @RequestBody String name) {
+        service.changeChannelName(id,name);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

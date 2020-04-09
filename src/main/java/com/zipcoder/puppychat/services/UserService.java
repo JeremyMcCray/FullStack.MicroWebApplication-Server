@@ -29,12 +29,30 @@ public class UserService {
         return repository.save(user);
     }
 
-    public User update(int id, User newInfo){
-        User existing = findById(id);
-        Util.copyNonNullProperties(newInfo, existing);
-        repository.save(existing);
-        return existing;
+    public User changePassword(int userId, String newPassword){
+        User u = findById(userId);
+        u.setPassword(newPassword);
+        return repository.save(u);
     }
+
+    public User changeEmail(int userId, String newEmail){
+        User u = findById(userId);
+        u.setEmail(newEmail);
+        return repository.save(u);
+    }
+
+    public User changeDisplayName(int userId, String newDisplayName){
+        User u = findById(userId);
+        u.setDisplayName(newDisplayName);
+        return repository.save(u);
+    }
+
+//    public User update(int id, User newInfo){
+//        User existing = findById(id);
+//        Util.copyNonNullProperties(newInfo, existing);
+//        repository.save(existing);
+//        return existing;
+//    }
 
     public void delete(int id){
         User user = findById(id);

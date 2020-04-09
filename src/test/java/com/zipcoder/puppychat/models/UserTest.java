@@ -60,11 +60,11 @@ public class UserTest {
         Assert.assertEquals("James Bond",user.getDisplayName());
     }
 
-    @Test
-    public void get_setUserName() {
-        user.setUserName("Bond007");
-        Assert.assertEquals("Bond007",user.getUserName());
-    }
+//    @Test
+//    public void get_setUserName() {
+//        user.setUserName("Bond007");
+//        Assert.assertEquals("Bond007",user.getUserName());
+//    }
 
     @Test
     public void get_and_set_SubscribedChannels() {
