@@ -35,9 +35,19 @@ public class UserController {
     }
 
     //=============== PUT Mappings ===============//
-    @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user) {
-        return new ResponseEntity<>(service.update(id,user), HttpStatus.OK);
+    @PutMapping("/password/{id}")
+    public ResponseEntity<User> updatePassword(@PathVariable int id, @RequestBody String password) {
+        return new ResponseEntity<>(service.changePassword(id,password), HttpStatus.OK);
+    }
+
+    @PutMapping("/email/{id}")
+    public ResponseEntity<User> updateEmail(@PathVariable int id, @RequestBody String email) {
+        return new ResponseEntity<>(service.changeEmail(id,email), HttpStatus.OK);
+    }
+
+    @PutMapping("/displayName/{id}")
+    public ResponseEntity<User> updateDisplayName(@PathVariable int id, @RequestBody String displayName) {
+        return new ResponseEntity<>(service.changeDisplayName(id,displayName), HttpStatus.OK);
     }
 
     //=============== DELETE Mappings ===============//

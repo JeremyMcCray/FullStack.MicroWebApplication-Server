@@ -12,7 +12,6 @@ public class User{
     @Column(nullable = false)
     private String password;
     private String email;
-    private String userName;
     private String displayName;
 
     @JsonIgnore
@@ -47,14 +46,6 @@ public class User{
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getDisplayName() {

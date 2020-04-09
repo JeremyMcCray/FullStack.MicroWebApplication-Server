@@ -37,20 +37,25 @@ public class MainMessageController {
     }
 
     //=============== POST Mappings ===============//
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<MainMessage> createMsg(@RequestBody MainMessage msg) {
         return new ResponseEntity<>(service.create(msg), HttpStatus.OK);
     }
 
     //=============== PUT Mappings ===============//
-//    @PutMapping("/{id}")
-//    public ResponseEntity<MainMessage> updateMsg(@PathVariable int id, @RequestBody MainMessage msg) {
-//        return new ResponseEntity<>(service.update(id,msg), HttpStatus.OK);
-//    }
-
     @PutMapping("/{id}")
-    public ResponseEntity<MainMessage> updateMsgContent(@PathVariable int id, @RequestBody String msg) {
-        return new ResponseEntity<>(service.updateMessage(id,msg), HttpStatus.OK);
+    public ResponseEntity<MainMessage> updateMsgContent(@PathVariable int id, @RequestBody String content) {
+        return new ResponseEntity<>(service.updateMessageContent(id,content), HttpStatus.OK);
+    }
+
+    @PutMapping("react/{msgId}/with/{emojiId}")
+    public ResponseEntity<MainMessage> reactWithEmoji(@PathVariable int msgId, @PathVariable int emojiId) {
+        return new ResponseEntity<>(service.reactWithEmoji(msgId,emojiId), HttpStatus.OK);
+    }
+
+    @PutMapping("add/{emojiId}/to/{msgId}")
+    public ResponseEntity<MainMessage> addEmojiCount(@PathVariable int msgId, @PathVariable int emojiId) {
+        return new ResponseEntity<>(service.addEmojiCount(msgId,emojiId), HttpStatus.OK);
     }
 
     //=============== DELETE Mappings ===============//

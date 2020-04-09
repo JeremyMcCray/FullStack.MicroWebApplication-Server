@@ -57,15 +57,15 @@ public class MainMessageService {
     }
 
     //editMessageContent
-    public MainMessage updateMessage(int messageId,String newMessage){
-        MainMessage message = mainMessageRepository.findById(messageId).orElseThrow(NotFoundException::new);
+    public MainMessage updateMessageContent(int messageId,String newMessage){
+        MainMessage message = findById(messageId);
         message.setContent(newMessage);
         return mainMessageRepository.save(message);
     }
 
     //react with emoji
     public MainMessage reactWithEmoji(int messageId, int emojiId){
-        MainMessage message = mainMessageRepository.findById(messageId).orElseThrow(NotFoundException::new);
+        MainMessage message = findById(messageId);
         Emoji emoji = emojiRepository.findById(emojiId).orElseThrow(NotFoundException::new);
         if(message.getReactionsCount().containsKey(emoji)) throw new DuplicateDataException();
         message.getReactionsCount().put(emoji,1);
@@ -74,7 +74,7 @@ public class MainMessageService {
 
     //add emoji count
     public MainMessage addEmojiCount(int messageId, int emojiId){
-        MainMessage message = mainMessageRepository.findById(messageId).orElseThrow(NotFoundException::new);
+        MainMessage message = findById(messageId);
         Emoji emoji = emojiRepository.findById(emojiId).orElseThrow(NotFoundException::new);
         if(!message.getReactionsCount().containsKey(emoji)) throw new NotFoundException();
         message.getReactionsCount().replace(emoji, message.getReactionsCount().get(emoji)+1 );
