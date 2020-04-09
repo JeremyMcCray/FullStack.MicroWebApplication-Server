@@ -47,8 +47,8 @@ public class ChannelController {
 
     //=============== POST Mappings ===============//
     @PostMapping("/{userId}")
-    public ResponseEntity<Channel> createChannel(@RequestBody Channel channel, @PathVariable int userId) {
-        return new ResponseEntity<>(service.create(channel,userId), HttpStatus.OK);
+    public ResponseEntity<Channel> createChannel(@PathVariable int userId, @RequestBody String name) {
+        return new ResponseEntity<>(service.create(userId, name), HttpStatus.OK);
     }
 
     //=============== PUT Mappings ===============//

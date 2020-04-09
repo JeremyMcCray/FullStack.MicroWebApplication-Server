@@ -17,6 +17,7 @@ public class MainMessageService {
     ChannelRepository channelRepository;
     DMSpaceRepository dmSpaceRepository;
     EmojiRepository emojiRepository;
+    ReplyRepository replyRepository;
 
 //All on one line because this was getting really long\\\ vvv
     @Autowired
@@ -25,13 +26,15 @@ public class MainMessageService {
             UserRepository userRepository,
             ChannelRepository channelRepository,
             DMSpaceRepository DMSpaceRepository,
-            EmojiRepository emojiRepository)
+            EmojiRepository emojiRepository,
+            ReplyRepository replyRepository)
     {
         this.mainMessageRepository = mainMessageRepository;
         this.userRepository = userRepository;
         this.channelRepository = channelRepository;
         this.dmSpaceRepository = DMSpaceRepository;
         this.emojiRepository = emojiRepository;
+        this.replyRepository = replyRepository;
     }
 
     public MainMessage findById(int id){
@@ -54,6 +57,12 @@ public class MainMessageService {
     public Iterable<MainMessage> findAllByDM(int dmSpaceID){
         DMSpace chat = dmSpaceRepository.findById(dmSpaceID).orElseThrow(NotFoundException::new);
         return mainMessageRepository.findMainMessageByChatSpace(chat);
+    }
+
+    //list all replies to a message
+    public Iterable<Reply> listAllReplies(int msgId){
+        MainMessage message = findById(msgId);
+        return replyRepository.findRepliesByRoot(message);
     }
 
     //editMessageContent
@@ -81,8 +90,19 @@ public class MainMessageService {
         return mainMessageRepository.save(message);
     }
 
-    public MainMessage create(MainMessage channel){
-        return mainMessageRepository.save(channel);
+    public MainMessage create(int userId, int chatSpaceId, String content){
+        User user = userRepository.findById(userId).orElseThrow(NotFoundException::new);
+        Optional<Channel> channel = channelRepository.findById(chatSpaceId);
+        MainMessage mm = new MainMessage();
+        if(!channel.isPresent()){
+            DMSpace dm = dmSpaceRepository.findById(chatSpaceId).orElseThrow(NotFoundException::new);
+            mm.setChatSpace(dm);
+        }else{
+            mm.setChatSpace(channel.get());
+        }
+        mm.setSpeaker(user);
+        mm.setContent(content);
+        return mainMessageRepository.save(mm);
     }
 
     public void delete(int id){

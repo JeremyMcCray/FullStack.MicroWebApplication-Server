@@ -8,6 +8,8 @@ import com.zipcoder.puppychat.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+
 @Service
 public class ChannelService {
     ChannelRepository repository;
@@ -33,8 +35,12 @@ public class ChannelService {
         return repository.findChannelsByMembers(u);
     }
 
-    public Channel create(Channel newChannel, int userId){
+    public Channel create(int userId, String channelName){
         User u = userRepository.findById(userId).orElseThrow(NotFoundException::new);
+        Channel newChannel = new Channel();
+        newChannel.setAdmins(new HashSet<>());
+        newChannel.setMembers(new HashSet<>());
+        newChannel.setName(channelName);
         newChannel.getAdmins().add(u);// add self
         newChannel.getMembers().add(u);// add self
         return repository.save(newChannel);

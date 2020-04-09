@@ -22,21 +22,18 @@ public class ReplyController {
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<Iterable<Reply>> getAllReply() {
-        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
-    }
-
     //=============== POST Mappings ===============//
-    @PostMapping("/create")
-    public ResponseEntity<Reply> createReply(@RequestBody Reply reply) {
-        return new ResponseEntity<>(service.create(reply), HttpStatus.OK);
+    @PostMapping("/on/{msgId}/by/{userId}")
+    public ResponseEntity<Reply> createReply(@PathVariable int msgId,
+                                             @PathVariable int userId,
+                                             @RequestBody String content) {
+        return new ResponseEntity<>(service.create(msgId,userId,content), HttpStatus.OK);
     }
 
     //=============== PUT Mappings ===============//
     @PutMapping("/{id}")
-    public ResponseEntity<Reply> updateReply(@PathVariable int id, @RequestBody Reply reply) {
-        return new ResponseEntity<>(service.update(id,reply), HttpStatus.OK);
+    public ResponseEntity<Reply> updateReplyContent(@PathVariable int id, @RequestBody String content) {
+        return new ResponseEntity<>(service.updateReplyContent(id,content), HttpStatus.OK);
     }
 
     //=============== DELETE Mappings ===============//

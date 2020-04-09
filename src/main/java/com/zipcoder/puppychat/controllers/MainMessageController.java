@@ -1,6 +1,7 @@
 package com.zipcoder.puppychat.controllers;
 
 import com.zipcoder.puppychat.models.MainMessage;
+import com.zipcoder.puppychat.models.Reply;
 import com.zipcoder.puppychat.services.MainMessageService;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
@@ -36,10 +37,15 @@ public class MainMessageController {
         return new ResponseEntity<>(service.findAllByDM(id), HttpStatus.OK);
     }
 
+    @GetMapping("/listAllReply/{id}")
+    public ResponseEntity<Iterable<Reply>> listAllReplies(@PathVariable int id){
+        return new ResponseEntity<>(service.listAllReplies(id), HttpStatus.OK);
+    }
+
     //=============== POST Mappings ===============//
-    @PostMapping
-    public ResponseEntity<MainMessage> createMsg(@RequestBody MainMessage msg) {
-        return new ResponseEntity<>(service.create(msg), HttpStatus.OK);
+    @PostMapping("/{userId}")
+    public ResponseEntity<MainMessage> createMsg(@PathVariable int userId, @PathVariable int chatId,  @RequestBody String content) {
+        return new ResponseEntity<>(service.create(userId, chatId, content), HttpStatus.OK);
     }
 
     //=============== PUT Mappings ===============//
