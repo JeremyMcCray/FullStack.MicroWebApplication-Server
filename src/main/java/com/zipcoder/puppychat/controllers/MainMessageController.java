@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/message")
+@RequestMapping("/msg")
 public class MainMessageController {
     MainMessageService service;
 
@@ -25,10 +25,16 @@ public class MainMessageController {
     public ResponseEntity<Iterable<MainMessage>> getAllMessageByUser(@PathVariable int id){
         return new ResponseEntity<>(service.findAllByUser(id), HttpStatus.OK);
     }
-//    @RequestMapping(value="/all", method= RequestMethod.GET)
-//    public ResponseEntity<Iterable<MainMessage>> getAllMsg() {
-//        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
-//    }
+
+    @GetMapping("/allByChannel/{id}")
+    public ResponseEntity<Iterable<MainMessage>> getAllMessageByChannel(@PathVariable int id){
+        return new ResponseEntity<>(service.findAllByChannel(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/allByDm/{id}")
+    public ResponseEntity<Iterable<MainMessage>> getAllMessageByDM(@PathVariable int id){
+        return new ResponseEntity<>(service.findAllByDM(id), HttpStatus.OK);
+    }
 
     //=============== POST Mappings ===============//
     @PostMapping("/create")
@@ -37,9 +43,14 @@ public class MainMessageController {
     }
 
     //=============== PUT Mappings ===============//
+//    @PutMapping("/{id}")
+//    public ResponseEntity<MainMessage> updateMsg(@PathVariable int id, @RequestBody MainMessage msg) {
+//        return new ResponseEntity<>(service.update(id,msg), HttpStatus.OK);
+//    }
+
     @PutMapping("/{id}")
-    public ResponseEntity<MainMessage> updateMsg(@PathVariable int id, @RequestBody MainMessage msg) {
-        return new ResponseEntity<>(service.update(id,msg), HttpStatus.OK);
+    public ResponseEntity<MainMessage> updateMsgContent(@PathVariable int id, @RequestBody String msg) {
+        return new ResponseEntity<>(service.updateMessage(id,msg), HttpStatus.OK);
     }
 
     //=============== DELETE Mappings ===============//

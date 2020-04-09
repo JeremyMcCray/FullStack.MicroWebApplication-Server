@@ -10,6 +10,7 @@ import java.util.*;
 //@Table(name="message_abstract")
 public abstract class Message {
     @Id
+    @GeneratedValue
     private int id;
 
     //@createdBy?
