@@ -32,6 +32,7 @@ public class DMSpaceServiceTest {
     public void findById() {
         int spaceId = 10;
         DMSpace space = new DMSpace();
+        space.setId(spaceId);
         Mockito.when(dmRepo.findById(spaceId)).thenReturn(Optional.of(space));
         Assert.assertEquals(space,dms.findById(spaceId));
     }
@@ -50,7 +51,7 @@ public class DMSpaceServiceTest {
 
         Mockito.when(dmRepo.findDMSpacesByMembers(user)).thenReturn(set);
         Mockito.when(userRepo.findById(userId)).thenReturn(Optional.of(user));
-        Assert.assertEquals(2,dms.findAllByAMember(userId).spliterator().getExactSizeIfKnown());
+        Assert.assertEquals(user.getDm(),dms.findAllByAMember(userId));
     }
 
     @Test
@@ -72,7 +73,8 @@ public class DMSpaceServiceTest {
         Mockito.when(dmRepo.save(any())).thenReturn(space);
 
         DMSpace actual = dms.create(userId,userId2);
-        Assert.assertEquals(s.size(),actual.getMembers().spliterator().getExactSizeIfKnown());
+        Assert.assertEquals(space,actual);
+        Assert.assertEquals(s,actual.getMembers());
     }
 
     @Test
@@ -94,7 +96,6 @@ public class DMSpaceServiceTest {
         Mockito.when(dmRepo.save(any())).thenReturn(updatedSpace);
 
         Assert.assertEquals(updatedSpace,dms.addMember(spaceId,userId));
-
     }
 
     @Test

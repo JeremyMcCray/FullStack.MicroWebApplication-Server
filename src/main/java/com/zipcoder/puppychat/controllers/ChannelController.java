@@ -53,40 +53,34 @@ public class ChannelController {
 
     //=============== PUT Mappings ===============//
     @PutMapping("/changeName/{id}")
-    public ResponseEntity<Void> updateChannelName(@PathVariable int id, @RequestBody String name) {
-        service.changeChannelName(id,name);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Channel> updateChannelName(@PathVariable int id, @RequestBody String name) {
+        return new ResponseEntity<Channel>(service.changeChannelName(id,name),HttpStatus.OK);
     }
 
     @PutMapping("/add/m/{id}/{channelId}")
-    public ResponseEntity<Void> addMember(@PathVariable int id, @PathVariable int channelId) {
-        service.addMember(channelId,id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Channel> addMember(@PathVariable int id, @PathVariable int channelId) {
+        return new ResponseEntity<>(service.addMember(channelId,id),HttpStatus.OK);
     }
 
     @PutMapping("/add/a/{id}/{channelId}")
-    public ResponseEntity<Void> addAdmin(@PathVariable int id, @PathVariable int channelId) {
-        service.addAdmin(channelId,id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Channel> addAdmin(@PathVariable int id, @PathVariable int channelId) {
+        return new ResponseEntity<>(service.addAdmin(channelId,id),HttpStatus.OK);
     }
 
 
     //=============== DELETE Mappings ===============//
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteChannel(@PathVariable int id) {
-        service.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Channel> deleteChannel(@PathVariable int id) {
+        return new ResponseEntity<>(service.delete(id),HttpStatus.OK);
     }
 
     @DeleteMapping("/m/{id}/{channelId}")
-    public ResponseEntity<Void> removeMember(@PathVariable int id, @PathVariable int channelId) {
-        service.removeMember(channelId,id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Channel> removeMember(@PathVariable int id, @PathVariable int channelId) {
+        return new ResponseEntity<>(service.removeMember(channelId,id),HttpStatus.OK);
     }
 
     @DeleteMapping("/a/{id}/{channelId}")
-    public ResponseEntity<Void> removeAdmin(@PathVariable int id, @PathVariable int channelId) {
-        service.removeAdmin(channelId,id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Channel> removeAdmin(@PathVariable int id, @PathVariable int channelId) {
+        return new ResponseEntity<>(service.removeAdmin(channelId,id),HttpStatus.OK);
     }
 }
