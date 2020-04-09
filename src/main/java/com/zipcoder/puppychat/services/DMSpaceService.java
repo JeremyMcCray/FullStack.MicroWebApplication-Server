@@ -42,11 +42,11 @@ public class DMSpaceService {
     }
 
     //add new member to space
-    public void addMember(int spaceId, int userId){
+    public DMSpace addMember(int spaceId, int userId){
         DMSpace existing = findById(spaceId);
         User u = userRepository.findById(userId).orElseThrow(NotFoundException::new);
         existing.getMembers().add(u);
-        repository.save(existing);
+        return repository.save(existing);
     }
 
     //get all members
@@ -55,8 +55,9 @@ public class DMSpaceService {
         return existing.getMembers();
     }
 
-    public void delete(int id){
-        DMSpace DMSpace = findById(id);
-        repository.delete(DMSpace);
+    public DMSpace delete(int id){
+        DMSpace space = findById(id);
+        repository.delete(space);
+        return space;
     }
 }
