@@ -36,8 +36,9 @@ public class EmojiService {
         return existing;
     }
 
-    public void delete(int id){
+    public Emoji delete(int id){
         Emoji emoji = findById(id);
         repository.delete(emoji);
+        return emoji;
     }
 }
