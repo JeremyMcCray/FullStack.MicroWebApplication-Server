@@ -1,5 +1,6 @@
 package com.zipcoder.puppychat.models;
 
+import javafx.scene.image.Image;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,19 +14,15 @@ public class EmojiTest {
     }
 
     @Test
-    public void get_an_set_EmojiName() {
+    public void get_and_set_EmojiName() {
         String name = "puppy";
         emoji.setName(name);
         String actual = emoji.getName();
         Assert.assertEquals("puppy", actual);
     }
 
-
     @Test
-    public void getImage() {
-    }
+    public void get_and_set_Image() {
 
-    @Test
-    public void setImage() {
     }
 }

@@ -46,6 +46,4 @@ public class ChannelTest {
         c.setTopic("we chat here!!!!!!");
         Assert.assertEquals( "we chat here!!!!!!" , c.getTopic()  );
     }
-
-
 }
