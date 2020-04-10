@@ -20,4 +20,7 @@ public class PuppyChatApplication {
 		return registrationBean;
 	}
 
+
+	//          font <- Controller ---- Service ---- Repository -> Data base
+
 }
