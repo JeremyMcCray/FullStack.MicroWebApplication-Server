@@ -47,9 +47,10 @@ public class ReplyService {
         return repository.save(reply);
     }
 
-    public void delete(int id){
+    public Reply delete(int id){
         Reply reply = findById(id);
         repository.delete(reply);
+        return reply;
     }
 
 //    public Reply update(int id, Reply newInfo){
