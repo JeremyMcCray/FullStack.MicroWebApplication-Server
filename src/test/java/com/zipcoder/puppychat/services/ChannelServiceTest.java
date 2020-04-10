@@ -213,7 +213,7 @@ public class ChannelServiceTest {
         channel.setId(spaceId);
         Mockito.when(chRepo.findById(spaceId)).thenReturn(Optional.of(channel));
 
-        Assert.assertEquals(channel.getAdmins(),chService.listAllMembers(spaceId));
+        Assert.assertEquals(channel.getAdmins(),chService.listAllAdmins(spaceId));
 
     }
 
