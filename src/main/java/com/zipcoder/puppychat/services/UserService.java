@@ -47,15 +47,9 @@ public class UserService {
         return repository.save(u);
     }
 
-//    public User update(int id, User newInfo){
-//        User existing = findById(id);
-//        Util.copyNonNullProperties(newInfo, existing);
-//        repository.save(existing);
-//        return existing;
-//    }
-
-    public void delete(int id){
+    public User delete(int id){
         User user = findById(id);
         repository.delete(user);
+        return user;
     }
 }
