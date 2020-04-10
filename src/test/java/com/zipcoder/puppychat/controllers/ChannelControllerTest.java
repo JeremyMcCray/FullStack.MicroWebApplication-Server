@@ -4,15 +4,17 @@ import com.zipcoder.puppychat.models.Channel;
 import com.zipcoder.puppychat.services.ChannelService;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
 
 import java.util.HashSet;
 
 import static org.junit.Assert.*;
-
+@RunWith(MockitoJUnitRunner.class)
 public class ChannelControllerTest {
 
     @Mock

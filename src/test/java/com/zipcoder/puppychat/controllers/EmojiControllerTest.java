@@ -14,6 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import static org.junit.Assert.*;
 
@@ -26,10 +27,11 @@ public class EmojiControllerTest {
     @InjectMocks
     EmojiController controller;
 
+
     @Test
     public void getEmoji() {
-        Mockito.when(service.findById(100)).thenReturn(new Emoji());
-        Assert.assertEquals( HttpStatus.OK, controller.getEmoji(100).getStatusCode());
+        Mockito.when(service.findById(30)).thenReturn(new Emoji());
+        Assert.assertEquals( HttpStatus.OK , controller.getEmoji(30).getStatusCode() );
     }
 
     @Test
@@ -48,8 +50,8 @@ public class EmojiControllerTest {
     @Test
     public void updateEmoji() {
         Emoji e = new Emoji();
-        Mockito.when(service.update(20,e)).thenReturn(e);
-        Assert.assertEquals( HttpStatus.OK, controller.updateEmoji(20,e).getStatusCode());
+        Mockito.when(service.update(12,e)).thenReturn(e);
+        Assert.assertEquals( HttpStatus.OK, controller.updateEmoji(12,e).getStatusCode());
     }
 
     @Test
