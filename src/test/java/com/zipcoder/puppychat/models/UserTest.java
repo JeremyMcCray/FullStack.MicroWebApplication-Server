@@ -3,8 +3,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class UserTest {
 
@@ -69,7 +69,7 @@ public class UserTest {
     @Test
     public void get_and_set_SubscribedChannels() {
 
-        List<Channel> subscribedChannels = new ArrayList<>();
+        Set<Channel> subscribedChannels = new HashSet<>();
         subscribedChannels.add(new Channel());
         subscribedChannels.add(new Channel());
 
@@ -81,7 +81,7 @@ public class UserTest {
     @Test
     public void get_and_set_ManagedChannels() {
 
-        List<Channel> managedChannels = new ArrayList<>();
+        Set<Channel> managedChannels = new HashSet<>();
         managedChannels.add(new Channel());
         managedChannels.add(new Channel());
 

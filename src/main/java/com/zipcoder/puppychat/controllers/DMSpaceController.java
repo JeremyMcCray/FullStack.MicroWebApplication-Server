@@ -43,15 +43,13 @@ public class DMSpaceController {
     //=============== PUT Mappings ===============//
     @PutMapping("add/{userId}/to/{dmSpaceId}")
     public ResponseEntity<DMSpace> addMemberToDMSpace(@PathVariable int dmSpaceId, @PathVariable int userId) {
-        service.addMember(dmSpaceId,userId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(service.addMember(dmSpaceId,userId),HttpStatus.OK);
     }
 
     //=============== DELETE Mappings ===============//
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteDMSpace(@PathVariable int id) {
-        service.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<DMSpace> deleteDMSpace(@PathVariable int id) {
+        return new ResponseEntity<>(service.delete(id),HttpStatus.OK);
     }
 
 }

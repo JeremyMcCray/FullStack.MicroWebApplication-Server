@@ -3,6 +3,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User{
@@ -16,11 +17,15 @@ public class User{
 
     @JsonIgnore
     @ManyToMany
-    private List<Channel> subscribedChannels;
+    private Set<Channel> subscribedChannels;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "admins")
-    private List<Channel> managedChannels;
+    private Set<Channel> managedChannels;
+
+    @JsonIgnore
+    @ManyToMany
+    private Set<DMSpace> dm;
 
     public User(){ }
 
@@ -56,19 +61,27 @@ public class User{
         this.displayName = displayName;
     }
 
-    public List<Channel> getSubscribedChannels() {
+    public Set<Channel> getSubscribedChannels() {
         return subscribedChannels;
     }
 
-    public void setSubscribedChannels(List<Channel> subscribedChannels) {
+    public void setSubscribedChannels(Set<Channel> subscribedChannels) {
         this.subscribedChannels = subscribedChannels;
     }
 
-    public List<Channel> getManagedChannels() {
+    public Set<Channel> getManagedChannels() {
         return managedChannels;
     }
 
-    public void setManagedChannels(List<Channel> managedChannels) {
+    public void setManagedChannels(Set<Channel> managedChannels) {
         this.managedChannels = managedChannels;
+    }
+
+    public Set<DMSpace> getDm() {
+        return dm;
+    }
+
+    public void setDm(Set<DMSpace> dm) {
+        this.dm = dm;
     }
 }

@@ -46,51 +46,43 @@ public class ChannelService {
         return repository.save(newChannel);
     }
 
-//    public Channel update(int id, Channel newInfo){
-//        Optional<Channel> channel = repository.findById(id);
-//        Channel existing = findById(id);
-//        Util.copyNonNullProperties(newInfo, existing);
-//        repository.save(existing);
-//        return existing;
-//    }
-
     //change channel name
-    public void changeChannelName(int channelId, String newName){
+    public Channel changeChannelName(int channelId, String newName){
         Channel existing = findById(channelId);
         existing.setName(newName);
-        repository.save(existing);
+        return repository.save(existing);
     }
 
     //add new member to channel
-    public void addMember(int channelId, int userId){
+    public Channel addMember(int channelId, int userId){
         Channel existing = findById(channelId);
         User u = userRepository.findById(userId).orElseThrow(NotFoundException::new);
         existing.getMembers().add(u);
-        repository.save(existing);
+        return repository.save(existing);
     }
 
     //add new admin to channel
-    public void addAdmin(int channelId, int userId){
+    public Channel addAdmin(int channelId, int userId){
         Channel existing = findById(channelId);
         User u = userRepository.findById(userId).orElseThrow(NotFoundException::new);
         existing.getAdmins().add(u);
-        repository.save(existing);
+        return repository.save(existing);
     }
 
     //remove a member from channel
-    public void removeMember(int channelId, int userId){
+    public Channel removeMember(int channelId, int userId){
         Channel existing = findById(channelId);
         User u = userRepository.findById(userId).orElseThrow(NotFoundException::new);
         existing.getMembers().remove(u);
-        repository.save(existing);
+        return repository.save(existing);
     }
 
     //remove a admin from channel
-    public void removeAdmin(int channelId, int userId){
+    public Channel removeAdmin(int channelId, int userId){
         Channel existing = findById(channelId);
         User u = userRepository.findById(userId).orElseThrow(NotFoundException::new);
         existing.getAdmins().remove(u);
-        repository.save(existing);
+        return repository.save(existing);
     }
 
     //get all admin
@@ -105,9 +97,10 @@ public class ChannelService {
         return existing.getMembers();
     }
 
-    public void delete(int id){
+    public Channel delete(int id){
         Channel channel = findById(id);
         repository.delete(channel);
+        return channel;
     }
 
 }
