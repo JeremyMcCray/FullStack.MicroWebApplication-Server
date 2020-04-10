@@ -105,9 +105,10 @@ public class MainMessageService {
         return mainMessageRepository.save(mm);
     }
 
-    public void delete(int id){
+    public MainMessage delete(int id){
         MainMessage mainMessage = findById(id);
         mainMessageRepository.delete(mainMessage);
+        return mainMessage;
     }
 
 
