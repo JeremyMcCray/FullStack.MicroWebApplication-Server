@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -25,15 +26,25 @@ public class UserServiceTest {
     @Test
     public void findById() {
         User u = new User();
-        User u2 = new User();
+        service.create(u);
+        u.setId(1);
 
+        Mockito.when(repository.findById(1)).thenReturn(Optional.of(u));
 
-
-        repository.findAll();
+        Assert.assertEquals(service.findById(1),u);
     }
 
     @Test
     public void findAll() {
+        User u = new User();
+        User u2 = new User();
+        service.create(u);
+        service.create(u2);
+
+        List<User> users1 = repository.findAll();
+        Mockito.when(repository.findAll()).thenReturn(users1);
+
+        Assert.assertEquals(users1,service.findAll());
     }
 
     @Test
@@ -85,9 +96,26 @@ public class UserServiceTest {
 
     @Test
     public void changeDisplayName() {
+        User u = new User();
+        u.setDisplayName("tom");
+        u.setId(1);
+
+        Mockito.when(repository.findById(1)).thenReturn(Optional.of(u));
+        Mockito.when(repository.save(u)).thenReturn(u);
+
+        service.changeDisplayName(1, "robert");
+
+        Assert.assertEquals(service.findById(1),u);
+        Assert.assertEquals(u.getDisplayName(),"robert");
     }
 
     @Test
     public void delete() {
+        User u = new User();
+        u.setId(1);
+
+        Mockito.when(repository.findById(1)).thenReturn(Optional.of(u));
+
+        Assert.assertEquals(u,service.delete(1));
     }
 }
