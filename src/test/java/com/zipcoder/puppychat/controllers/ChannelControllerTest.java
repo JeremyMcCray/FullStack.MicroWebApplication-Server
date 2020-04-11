@@ -49,7 +49,6 @@ public class ChannelControllerTest {
 
     @Test
     public void getAllMembersByChannel() {
-        Mockito.when(channelService.findAllByAMember(888)).thenReturn(new HashSet<>());
         Assert.assertEquals(HttpStatus.OK, channelController.getAllAdminsByChannel(888).getStatusCode());
     }
 
