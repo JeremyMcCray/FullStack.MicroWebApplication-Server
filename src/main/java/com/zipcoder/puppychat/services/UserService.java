@@ -54,8 +54,9 @@ public class UserService {
 //        return existing;
 //    }
 
-    public void delete(int id){
+    public User delete(int id){
         User user = findById(id);
         repository.delete(user);
+        return user;
     }
 }
