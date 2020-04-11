@@ -3,6 +3,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class UserTest {
 
     User user = new User();
@@ -10,7 +13,7 @@ public class UserTest {
     @Before
     public void setUp(){
         user.setId(98);
-        user.setPassWord("PassW0rd");
+        user.setPassword("PassW0rd");
         user.setEmail("john@email.com");
         user.setDisplayName("John Wick");
     }
@@ -20,7 +23,7 @@ public class UserTest {
 
     @Test
     public void getPassWord() {
-        Assert.assertEquals("PassW0rd",user.getPassWord());
+        Assert.assertEquals("PassW0rd",user.getPassword());
     }
 
     @Test
@@ -41,8 +44,8 @@ public class UserTest {
 
     @Test
     public void setPassWord() {
-        user.setPassWord("Pa55word");
-        Assert.assertEquals("Pa55word",user.getPassWord());
+        user.setPassword("Pa55word");
+        Assert.assertEquals("Pa55word",user.getPassword());
     }
 
     @Test
@@ -56,4 +59,35 @@ public class UserTest {
         user.setDisplayName("James Bond");
         Assert.assertEquals("James Bond",user.getDisplayName());
     }
+
+//    @Test
+//    public void get_setUserName() {
+//        user.setUserName("Bond007");
+//        Assert.assertEquals("Bond007",user.getUserName());
+//    }
+
+    @Test
+    public void get_and_set_SubscribedChannels() {
+
+        Set<Channel> subscribedChannels = new HashSet<>();
+        subscribedChannels.add(new Channel());
+        subscribedChannels.add(new Channel());
+
+        User user = new User();
+        user.setSubscribedChannels(subscribedChannels);
+        Assert.assertEquals(subscribedChannels, user.getSubscribedChannels());
+    }
+
+    @Test
+    public void get_and_set_ManagedChannels() {
+
+        Set<Channel> managedChannels = new HashSet<>();
+        managedChannels.add(new Channel());
+        managedChannels.add(new Channel());
+
+        User user = new User();
+        user.setManagedChannels(managedChannels);
+        Assert.assertEquals(managedChannels, user.getManagedChannels());
+    }
+
 }

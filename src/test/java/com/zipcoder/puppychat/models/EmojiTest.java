@@ -1,6 +1,5 @@
 package com.zipcoder.puppychat.models;
 
-import javafx.scene.image.Image;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,20 +8,42 @@ public class EmojiTest {
     Emoji emoji = new Emoji();
 
     @Before
-    public void setUp() {
-        emoji.setName("puppy");
+    public void setUp(){
+        emoji.setId(1);
+        emoji.setName("Happy");
+        emoji.setImage(":)");
     }
 
     @Test
-    public void get_and_set_EmojiName() {
-        String name = "puppy";
-        emoji.setName(name);
-        String actual = emoji.getName();
-        Assert.assertEquals("puppy", actual);
+    public void getId(){
+        Assert.assertEquals(1,emoji.getId());
     }
 
     @Test
-    public void get_and_set_Image() {
+    public void setId() {
+        emoji.setId(99);
+        Assert.assertEquals(99,emoji.getId());
+    }
 
+    @Test
+    public void getName() {
+        Assert.assertEquals("Happy",emoji.getName());
+    }
+
+    @Test
+    public void setName() {
+        emoji.setName("Sad");
+        Assert.assertEquals("Sad",emoji.getName());
+    }
+
+    @Test
+    public void getImage() {
+        Assert.assertEquals(":)",emoji.getImage());
+    }
+
+    @Test
+    public void setImage() {
+        emoji.setName(":(");
+        Assert.assertEquals(":(",emoji.getName());
     }
 }

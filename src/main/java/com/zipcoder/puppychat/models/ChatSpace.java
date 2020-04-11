@@ -1,21 +1,20 @@
 package com.zipcoder.puppychat.models;
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+//@MappedSuperClass
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@Table(name="chat_abstract")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@Table(name="chat_abstract")
 public abstract class ChatSpace {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY )
+    @GeneratedValue
     private int id;
 
     @ManyToMany
-    private List<User> members;
-
-    @ManyToMany
-    private List<MainMessage> messages;
+    private Set<User> members = new HashSet<>();
 
     public ChatSpace(){}
 
@@ -23,20 +22,12 @@ public abstract class ChatSpace {
 
     public void setId(int id) { this.id = id; }
 
-    public List<User> getMembers() {
+    public Set<User> getMembers() {
         return members;
     }
 
-    public void setMembers(List<User> members) {
+    public void setMembers(Set<User> members) {
         this.members = members;
-    }
-
-    public List<MainMessage> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<MainMessage> message) {
-        this.messages = message;
     }
 
 

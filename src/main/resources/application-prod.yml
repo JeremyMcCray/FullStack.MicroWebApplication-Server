@@ -5,3 +5,5 @@ spring:
     url: puppychatdb.cshychaanbiw.us-east-2.rds.amazonaws.com
     username: puppy
     password: PuppyChatUser123
+
+    #pupchat

@@ -1,9 +1,11 @@
 package com.zipcoder.puppychat.models;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name="user")
 public class User{
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
@@ -11,16 +13,21 @@ public class User{
     @Column(nullable = false)
     private String password;
     private String email;
-    private String userName;
     private String displayName;
 
+    @JsonIgnore
     @ManyToMany
-    private List<Channel> subscribedChannels;
+    private Set<Channel> subscribedChannels;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "admins")
-    private List<Channel> managedChannels;
+    private Set<Channel> managedChannels;
 
-    public User() { }
+    @JsonIgnore
+    @ManyToMany
+    private Set<DMSpace> dm;
+
+    public User(){ }
 
     public int getId() {
         return id;
@@ -30,12 +37,12 @@ public class User{
         this.id = id;
     }
 
-    public String getPassWord() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassWord(String passWord) {
-        this.password = passWord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -50,39 +57,31 @@ public class User{
         return displayName;
     }
 
-    public void setDisplayName(String name) {
-        this.displayName = name;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public List<Channel> getSubscribedChannels() {
+    public Set<Channel> getSubscribedChannels() {
         return subscribedChannels;
     }
 
-    public void setSubscribedChannels(List<Channel> subscribedChannels) {
+    public void setSubscribedChannels(Set<Channel> subscribedChannels) {
         this.subscribedChannels = subscribedChannels;
     }
 
-    public List<Channel> getManagedChannels() {
+    public Set<Channel> getManagedChannels() {
         return managedChannels;
     }
 
-    public void setManagedChannels(List<Channel> managedChannels) {
+    public void setManagedChannels(Set<Channel> managedChannels) {
         this.managedChannels = managedChannels;
+    }
+
+    public Set<DMSpace> getDm() {
+        return dm;
+    }
+
+    public void setDm(Set<DMSpace> dm) {
+        this.dm = dm;
     }
 }
