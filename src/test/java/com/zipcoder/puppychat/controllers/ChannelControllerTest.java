@@ -56,7 +56,6 @@ public class ChannelControllerTest {
     @Test
     public void createChannel() {
         Channel channel = new Channel();
-        Mockito.when(channelService.create(432, "Johnny Smith")).thenReturn(channel);
         Assert.assertEquals(HttpStatus.OK, channelController.getAllAdminsByChannel(773).getStatusCode());
     }
 
