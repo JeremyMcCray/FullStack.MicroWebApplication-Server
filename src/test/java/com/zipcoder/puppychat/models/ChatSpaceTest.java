@@ -11,7 +11,7 @@ public class ChatSpaceTest {
 
     @Before
     public void setUp() {
-       c1.setId(89);
+        c1.setId(89);
     }
 
     @Test

@@ -57,7 +57,6 @@ public class UserServiceTest {
         u.setEmail("tomsEmail@email.com");
 
         Mockito.when(repository.findById(uid)).thenReturn(Optional.of(u));
-        Mockito.when(repository.save(any())).thenReturn(u);
 
 
         Assert.assertEquals( u,service.findById(1));
