@@ -12,6 +12,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
 
 import java.lang.reflect.Member;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -43,19 +44,18 @@ public class ChannelControllerTest {
 
     @Test
     public void getAllAdminsByChannel() {
-        Mockito.when(channelService.listAllAdmins(777)).thenReturn(new HashSet<>());
-        Assert.assertEquals(HttpStatus.OK, channelController.getAllAdminsByChannel(777).getStatusCode());
+        Assert.assertEquals(HttpStatus.OK, channelController.getAllAdminsByChannel(888).getStatusCode());
     }
 
     @Test
     public void getAllMembersByChannel() {
-        Assert.assertEquals(HttpStatus.OK, channelController.getAllAdminsByChannel(888).getStatusCode());
+        Assert.assertEquals(HttpStatus.OK, channelController.getAllMembersByChannel(888).getStatusCode());
     }
 
     @Test
     public void createChannel() {
         Channel channel = new Channel();
-        Assert.assertEquals(HttpStatus.OK, channelController.getAllAdminsByChannel(773).getStatusCode());
+        Assert.assertEquals(HttpStatus.OK, channelController.createChannel(888, "Jeff").getStatusCode());
     }
 
     @Test
