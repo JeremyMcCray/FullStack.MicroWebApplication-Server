@@ -49,18 +49,20 @@ public class ChannelControllerTest {
 
     @Test
     public void getAllMembersByChannel() {
-        Mockito.when(channelService.listAllMembers(888) ).thenReturn(new HashSet<>());
+        Mockito.when(channelService.findAllByAMember(888) ).thenReturn(new HashSet<>());
         Assert.assertEquals(HttpStatus.OK, channelController.getAllAdminsByChannel(888).getStatusCode());
     }
 
     @Test
     public void createChannel() {
-        Mockito.when(channelService.listAllMembers(773)).thenReturn(new HashSet<>());
+        Channel channel = new Channel();
+        Mockito.when(channelService.create(432, "Johnny Smith")).thenReturn(channel);
         Assert.assertEquals(HttpStatus.OK, channelController.getAllAdminsByChannel(773).getStatusCode());
     }
 
     @Test
     public void updateChannelName() {
+        Mockito.when(channelService.listAllMembers(()))
     }
 
     @Test
