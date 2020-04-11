@@ -62,7 +62,6 @@ public class ChannelControllerTest {
     @Test
     public void updateChannelName() {
         Channel channel = new Channel();
-        Mockito.when(channelService.create(999, "Kathy")).thenReturn(channel);
         Assert.assertEquals(HttpStatus.OK, channelController.updateChannelName(999, "Kathy").getStatusCode());
     }
 
