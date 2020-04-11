@@ -27,11 +27,10 @@ public class EmojiControllerTest {
     @InjectMocks
     EmojiController controller;
 
-
     @Test
     public void getEmoji() {
         Mockito.when(service.findById(30)).thenReturn(new Emoji());
-        Assert.assertEquals( HttpStatus.OK , controller.getEmoji(30).getStatusCode() );
+        Assert.assertEquals( HttpStatus.OK, controller.getEmoji(30).getStatusCode() );
     }
 
     @Test
