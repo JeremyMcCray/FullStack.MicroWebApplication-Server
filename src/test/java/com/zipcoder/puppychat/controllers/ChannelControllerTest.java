@@ -83,14 +83,19 @@ public class ChannelControllerTest {
 
     @Test
     public void deleteChannel() {
+        Mockito.when(channelService.delete(888)).thenReturn(new Channel());
+        Assert.assertEquals(HttpStatus.OK, channelController.deleteChannel(888).getStatusCode());
     }
 
     @Test
     public void removeMember() {
+        Mockito.when(channelService.removeMember(888, 999)).thenReturn(new Channel());
+        Assert.assertEquals(HttpStatus.OK, channelController.removeMember(999, 888).getStatusCode());
     }
 
     @Test
     public void removeAdmin() {
-
+        Mockito.when(channelService.removeAdmin(111, 222)).thenReturn(new Channel());
+        Assert.assertEquals(HttpStatus.OK, channelController.removeAdmin(222, 111).getStatusCode());
     }
 }
