@@ -2,7 +2,7 @@
 spring:
   profiles: prod
   datasource:
-    url: puppychatdb.cshychaanbiw.us-east-2.rds.amazonaws.com
+    url: jdbc:mysql://puppychatdb.cshychaanbiw.us-east-2.rds.amazonaws.com/pupchat
     username: puppy
     password: PuppyChatUser123
 

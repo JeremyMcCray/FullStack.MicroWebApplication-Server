@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
+@CrossOrigin
 @RequestMapping("/user")
 public class UserController {
 
