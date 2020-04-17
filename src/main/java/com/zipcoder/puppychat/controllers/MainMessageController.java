@@ -44,7 +44,7 @@ public class MainMessageController {
     }
 
     //=============== POST Mappings ===============//
-    @PostMapping("/{userId}")
+    @PostMapping("/{userId}/{chatId}")
     public ResponseEntity<MainMessage> createMsg(@PathVariable int userId, @PathVariable int chatId,  @RequestBody String content) {
         return new ResponseEntity<>(service.create(userId, chatId, content), HttpStatus.OK);
     }

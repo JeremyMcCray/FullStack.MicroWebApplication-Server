@@ -3,6 +3,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
@@ -18,8 +19,7 @@ public abstract class Message {
     private User speaker;
     private String content;
 
-    @CreatedDate
-    private LocalDate timeStamp;
+    private LocalDateTime timeStamp;
 
     @ElementCollection
     @CollectionTable(name = "reaction_mapping",
@@ -60,11 +60,11 @@ public abstract class Message {
         this.content = content;
     }
 
-    public LocalDate getTimeStamp() {
+    public LocalDateTime getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(LocalDate timeStamp) {
+    public void setTimeStamp(LocalDateTime timeStamp) {
         this.timeStamp = timeStamp;
     }
 

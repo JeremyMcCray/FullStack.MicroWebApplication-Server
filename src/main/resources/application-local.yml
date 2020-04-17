@@ -3,6 +3,6 @@ spring:
   profiles: local
   datasource:
     url: jdbc:mysql://localhost:3306/testDB?serverTimezone=UTC
-    username: root
-    password: spaz3286
+    username: user
+    password: useruser
     driver-class-name: com.mysql.cj.jdbc.Driver
