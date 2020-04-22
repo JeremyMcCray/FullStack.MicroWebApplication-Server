@@ -26,6 +26,7 @@ public class ChannelController {
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
+
     @GetMapping("/all/a/{userId}")
     public ResponseEntity<Iterable<Channel>> getAllManagedChannels(@PathVariable int userId) {
         return new ResponseEntity<>(service.findAllByAnAdmin(userId), HttpStatus.OK);

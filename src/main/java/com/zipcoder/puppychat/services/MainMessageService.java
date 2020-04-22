@@ -7,6 +7,7 @@ import com.zipcoder.puppychat.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -58,6 +59,17 @@ public class MainMessageService {
     public Iterable<MainMessage> findAllByDM(int dmSpaceID){
         DMSpace chat = dmSpaceRepository.findById(dmSpaceID).orElseThrow(NotFoundException::new);
         return mainMessageRepository.findMainMessageByChatSpace(chat);
+    }
+
+    //find all by chat
+    public Iterable<MainMessage> findAllByChat(int id){
+        Optional<DMSpace> dm = dmSpaceRepository.findById(id);
+        if(!dm.isPresent()){
+            Channel ch = channelRepository.findById(id).orElseThrow(NotFoundException::new);
+            return mainMessageRepository.findMainMessageByChatSpace(ch);
+        }else{
+            return mainMessageRepository.findMainMessageByChatSpace(dm.get());
+        }
     }
 
     //list all replies to a message

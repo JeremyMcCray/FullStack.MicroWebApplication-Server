@@ -35,6 +35,11 @@ public class UserController {
         return new ResponseEntity<>(service.create(user), HttpStatus.OK);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@RequestBody User user) {
+        return new ResponseEntity<>(service.login(user.getEmail(), user.getPassword()), HttpStatus.OK);
+    }
+
     //=============== PUT Mappings ===============//
     @PutMapping("/password/{id}")
     public ResponseEntity<User> updatePassword(@PathVariable int id, @RequestBody String password) {

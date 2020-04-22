@@ -38,6 +38,11 @@ public class MainMessageController {
         return new ResponseEntity<>(service.findAllByDM(id), HttpStatus.OK);
     }
 
+    @GetMapping("/allByChat/{id}")
+    public ResponseEntity<Iterable<MainMessage>> getAllMessageByChat(@PathVariable int id){
+        return new ResponseEntity<>(service.findAllByChat(id), HttpStatus.OK);
+    }
+
     @GetMapping("/listAllReply/{id}")
     public ResponseEntity<Iterable<Reply>> listAllReplies(@PathVariable int id){
         return new ResponseEntity<>(service.listAllReplies(id), HttpStatus.OK);

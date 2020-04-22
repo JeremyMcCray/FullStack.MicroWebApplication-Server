@@ -19,6 +19,7 @@ public abstract class Message {
     private User speaker;
     private String content;
 
+    @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime timeStamp;
 
     @ElementCollection
