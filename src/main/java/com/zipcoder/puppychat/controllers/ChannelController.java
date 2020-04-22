@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@CrossOrigin
 @RequestMapping("/channel")
 public class ChannelController {
     ChannelService service;
@@ -24,6 +25,7 @@ public class ChannelController {
     public ResponseEntity<Channel> getChannel(@PathVariable int id) {
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
+
 
     @GetMapping("/all/a/{userId}")
     public ResponseEntity<Iterable<Channel>> getAllManagedChannels(@PathVariable int userId) {

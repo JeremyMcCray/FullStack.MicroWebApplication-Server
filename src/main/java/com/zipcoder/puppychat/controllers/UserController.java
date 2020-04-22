@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
+@CrossOrigin
 @RequestMapping("/user")
 public class UserController {
 
@@ -32,6 +33,11 @@ public class UserController {
     @PostMapping("/create")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         return new ResponseEntity<>(service.create(user), HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@RequestBody User user) {
+        return new ResponseEntity<>(service.login(user.getEmail(), user.getPassword()), HttpStatus.OK);
     }
 
     //=============== PUT Mappings ===============//
