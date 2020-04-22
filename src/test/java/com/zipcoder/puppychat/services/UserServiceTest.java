@@ -25,7 +25,7 @@ public class UserServiceTest {
 
     @Test
     public void findById() {
-        User u = new User();
+        User u= new User();
         service.create(u);
         u.setId(1);
 
