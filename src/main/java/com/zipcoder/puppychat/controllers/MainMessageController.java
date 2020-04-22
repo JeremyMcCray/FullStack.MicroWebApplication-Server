@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@CrossOrigin
 @RequestMapping("/msg")
 public class MainMessageController {
     MainMessageService service;
@@ -37,13 +38,18 @@ public class MainMessageController {
         return new ResponseEntity<>(service.findAllByDM(id), HttpStatus.OK);
     }
 
+    @GetMapping("/allByChat/{id}")
+    public ResponseEntity<Iterable<MainMessage>> getAllMessageByChat(@PathVariable int id){
+        return new ResponseEntity<>(service.findAllByChat(id), HttpStatus.OK);
+    }
+
     @GetMapping("/listAllReply/{id}")
     public ResponseEntity<Iterable<Reply>> listAllReplies(@PathVariable int id){
         return new ResponseEntity<>(service.listAllReplies(id), HttpStatus.OK);
     }
 
     //=============== POST Mappings ===============//
-    @PostMapping("/{userId}")
+    @PostMapping("/{userId}/{chatId}")
     public ResponseEntity<MainMessage> createMsg(@PathVariable int userId, @PathVariable int chatId,  @RequestBody String content) {
         return new ResponseEntity<>(service.create(userId, chatId, content), HttpStatus.OK);
     }

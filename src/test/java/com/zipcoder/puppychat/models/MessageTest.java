@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,9 +65,9 @@ public class MessageTest {
     @Test
     public void get_and_set_Time() {
         Message m1 = new MainMessage();
-        LocalDate d1 =  LocalDate.now();
+        LocalDateTime d1 =  LocalDateTime.now();
         m1.setTimeStamp(d1);
-        LocalDate expected = m1.getTimeStamp();
+        LocalDateTime expected = m1.getTimeStamp();
         Assert.assertEquals(expected, d1);
     }
 }

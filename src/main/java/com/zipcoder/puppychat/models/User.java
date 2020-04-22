@@ -12,7 +12,10 @@ public class User{
     private int id;
     @Column(nullable = false)
     private String password;
+
+    @Column(unique = true)
     private String email;
+
     private String displayName;
 
     @JsonIgnore

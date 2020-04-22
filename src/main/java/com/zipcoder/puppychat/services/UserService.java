@@ -1,5 +1,7 @@
 package com.zipcoder.puppychat.services;
 
+import com.zipcoder.puppychat.error.AuthenticationException;
+import com.zipcoder.puppychat.error.DuplicateDataException;
 import com.zipcoder.puppychat.error.NotFoundException;
 import com.zipcoder.puppychat.models.User;
 import com.zipcoder.puppychat.repositories.UserRepository;
@@ -26,6 +28,9 @@ public class UserService {
     }
 
     public User create(User user){
+        if(repository.findUserByEmail(user.getEmail()) != null){
+            throw new DuplicateDataException();
+        }
         return repository.save(user);
     }
 
@@ -50,6 +55,16 @@ public class UserService {
     public User delete(int id){
         User user = findById(id);
         repository.delete(user);
+        return user;
+    }
+
+    public User login(String email, String pass){
+        User user = repository.findUserByEmail(email);
+        if(user == null)
+            throw new AuthenticationException();
+        if(!user.getPassword().equals(pass)){
+            throw new AuthenticationException();
+        }
         return user;
     }
 }
