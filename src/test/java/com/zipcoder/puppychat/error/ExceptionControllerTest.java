@@ -19,4 +19,7 @@ public class ExceptionControllerTest {
     public void handleDupeTest() {
         Assert.assertEquals( HttpStatus.CONFLICT,ex.handleDupe().getStatusCode());
     }
+
+    @Test
+    public void handleBadAuth() {Assert.assertEquals(HttpStatus.UNAUTHORIZED,ex.handleBadAuth().getStatusCode());}
 }
