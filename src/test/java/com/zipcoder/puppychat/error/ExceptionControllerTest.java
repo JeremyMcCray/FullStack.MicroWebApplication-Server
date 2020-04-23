@@ -21,5 +21,5 @@ public class ExceptionControllerTest {
     }
 
     @Test
-    public void handleBadAuth() {Assert.assertEquals(HttpStatus.UNAUTHORIZED,ex.handleBadAuth().getStatusCode());}
+    public void handleBadAuthTest() {Assert.assertEquals(HttpStatus.UNAUTHORIZED,ex.handleBadAuth().getStatusCode());}
 }
