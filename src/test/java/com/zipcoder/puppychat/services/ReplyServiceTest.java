@@ -16,7 +16,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Optional;
 
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -38,7 +37,7 @@ public class ReplyServiceTest {
         reply.setId(replyId);
 
         Mockito.when(replyRepository.findById(replyId)).thenReturn(Optional.of(reply));
-        Assert.assertEquals(reply,replyService.findById(replyId));
+        Assert.assertEquals(reply, replyService.findById(replyId));
     }
 
     @Test
@@ -56,7 +55,7 @@ public class ReplyServiceTest {
 
         Mockito.when(replyRepository.findById(replyId)).thenReturn(Optional.of(reply));
         Mockito.when(replyRepository.save(any())).thenReturn(updateReply);
-        Assert.assertEquals( updateReply ,replyService.updateReplyContent(replyId,newContent));
+        Assert.assertEquals(updateReply, replyService.updateReplyContent(replyId, newContent));
     }
 
     @Test
@@ -77,7 +76,7 @@ public class ReplyServiceTest {
         Mockito.when(userRepository.findById(userId)).thenReturn(Optional.of(user));
         Mockito.when(replyRepository.save(any())).thenReturn(reply);
 
-        Assert.assertEquals(reply, replyService.create(msgId,userId,"some reply"));
+        Assert.assertEquals(reply, replyService.create(msgId, userId, "some reply"));
 
     }
 
@@ -87,6 +86,6 @@ public class ReplyServiceTest {
         Reply reply = new Reply();
         reply.setId(replyId);
         Mockito.when(replyRepository.findById(replyId)).thenReturn(Optional.of(reply));
-        Assert.assertEquals(reply,replyService.delete(replyId));
+        Assert.assertEquals(reply, replyService.delete(replyId));
     }
 }

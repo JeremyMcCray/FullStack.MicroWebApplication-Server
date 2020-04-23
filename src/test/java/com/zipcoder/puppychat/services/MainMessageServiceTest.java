@@ -12,9 +12,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -41,7 +43,7 @@ public class MainMessageServiceTest {
         MainMessage mm = new MainMessage();
         mm.setId(msgId);
         Mockito.when(mainMessageRepository.findById(msgId)).thenReturn(Optional.of(mm));
-        Assert.assertEquals(mm,mainMessageService.findById(msgId));
+        Assert.assertEquals(mm, mainMessageService.findById(msgId));
     }
 
     @Test
@@ -56,7 +58,7 @@ public class MainMessageServiceTest {
 
         Mockito.when(mainMessageRepository.findMainMessagesBySpeaker(user)).thenReturn(list);
         Mockito.when(userRepository.findById(userId)).thenReturn(Optional.of(user));
-        Assert.assertEquals(list,mainMessageService.findAllByUser(userId));
+        Assert.assertEquals(list, mainMessageService.findAllByUser(userId));
     }
 
     @Test
@@ -71,7 +73,7 @@ public class MainMessageServiceTest {
 
         Mockito.when(mainMessageRepository.findMainMessageByChatSpace(channel)).thenReturn(list);
         Mockito.when(channelRepository.findById(channelId)).thenReturn(Optional.of(channel));
-        Assert.assertEquals(list,mainMessageService.findAllByChannel(channelId));
+        Assert.assertEquals(list, mainMessageService.findAllByChannel(channelId));
     }
 
     @Test
@@ -86,7 +88,7 @@ public class MainMessageServiceTest {
 
         Mockito.when(mainMessageRepository.findMainMessageByChatSpace(dm)).thenReturn(list);
         Mockito.when(dmSpaceRepository.findById(dmId)).thenReturn(Optional.of(dm));
-        Assert.assertEquals(list,mainMessageService.findAllByDM(dmId));
+        Assert.assertEquals(list, mainMessageService.findAllByDM(dmId));
     }
 
     @Test
@@ -119,7 +121,7 @@ public class MainMessageServiceTest {
 
         Mockito.when(mainMessageRepository.findById(msgId)).thenReturn(Optional.of(msg));
         Mockito.when(mainMessageRepository.save(any())).thenReturn(updatedMsg);
-        Assert.assertEquals( updatedMsg ,mainMessageService.updateMessageContent(msgId,newContent));
+        Assert.assertEquals(updatedMsg, mainMessageService.updateMessageContent(msgId, newContent));
     }
 
     @Test
@@ -135,12 +137,12 @@ public class MainMessageServiceTest {
         MainMessage updatedMsg = new MainMessage();
         updatedMsg.setId(msgId);
         updatedMsg.setReactionsCount(new HashMap<>());
-        updatedMsg.getReactionsCount().put(emoji,1);
+        updatedMsg.getReactionsCount().put(emoji, 1);
 
         Mockito.when(mainMessageRepository.findById(msgId)).thenReturn(Optional.of(msg));
         Mockito.when(emojiRepository.findById(emojiId)).thenReturn(Optional.of(emoji));
         Mockito.when(mainMessageRepository.save(any())).thenReturn(updatedMsg);
-        Assert.assertEquals(updatedMsg ,mainMessageService.reactWithEmoji(msgId,emojiId));
+        Assert.assertEquals(updatedMsg, mainMessageService.reactWithEmoji(msgId, emojiId));
     }
 
     @Test(expected = DuplicateDataException.class)
@@ -154,11 +156,11 @@ public class MainMessageServiceTest {
         emoji.setId(emojiId);
 
         msg.setReactionsCount(new HashMap<>());
-        msg.getReactionsCount().put(emoji,5);
+        msg.getReactionsCount().put(emoji, 5);
 
         Mockito.when(mainMessageRepository.findById(msgId)).thenReturn(Optional.of(msg));
         Mockito.when(emojiRepository.findById(emojiId)).thenReturn(Optional.of(emoji));
-        mainMessageService.reactWithEmoji(msgId,emojiId);
+        mainMessageService.reactWithEmoji(msgId, emojiId);
     }
 
 
@@ -173,17 +175,17 @@ public class MainMessageServiceTest {
         emoji.setId(emojiId);
 
         msg.setReactionsCount(new HashMap<>());
-        msg.getReactionsCount().put(emoji,5);
+        msg.getReactionsCount().put(emoji, 5);
 
         MainMessage updatedMsg = new MainMessage();
         updatedMsg.setId(msgId);
         updatedMsg.setReactionsCount(new HashMap<>());
-        updatedMsg.getReactionsCount().put(emoji,6);
+        updatedMsg.getReactionsCount().put(emoji, 6);
 
         Mockito.when(mainMessageRepository.findById(msgId)).thenReturn(Optional.of(msg));
         Mockito.when(emojiRepository.findById(emojiId)).thenReturn(Optional.of(emoji));
         Mockito.when(mainMessageRepository.save(any())).thenReturn(updatedMsg);
-        Assert.assertEquals(updatedMsg ,mainMessageService.addEmojiCount(msgId,emojiId));
+        Assert.assertEquals(updatedMsg, mainMessageService.addEmojiCount(msgId, emojiId));
     }
 
     @Test(expected = NotFoundException.class)
@@ -201,7 +203,7 @@ public class MainMessageServiceTest {
 
         Mockito.when(mainMessageRepository.findById(msgId)).thenReturn(Optional.of(msg));
         Mockito.when(emojiRepository.findById(emojiId)).thenReturn(Optional.of(emoji));
-        Assert.assertEquals(updatedMsg ,mainMessageService.addEmojiCount(msgId,emojiId));
+        Assert.assertEquals(updatedMsg, mainMessageService.addEmojiCount(msgId, emojiId));
     }
 
     @Test
@@ -222,7 +224,7 @@ public class MainMessageServiceTest {
         Mockito.when(channelRepository.findById(chatId)).thenReturn(Optional.of(channel));
         Mockito.when(mainMessageRepository.save(any())).thenReturn(msg);
 
-        Assert.assertEquals( msg ,mainMessageService.create(userId,chatId,"hello!"));
+        Assert.assertEquals(msg, mainMessageService.create(userId, chatId, "hello!"));
     }
 
 
@@ -244,7 +246,7 @@ public class MainMessageServiceTest {
         Mockito.when(dmSpaceRepository.findById(dmId)).thenReturn(Optional.of(dm));
         Mockito.when(mainMessageRepository.save(any())).thenReturn(msg);
 
-        Assert.assertEquals( msg ,mainMessageService.create(userId,dmId,"hello!!!!!!!"));
+        Assert.assertEquals(msg, mainMessageService.create(userId, dmId, "hello!!!!!!!"));
     }
 
     @Test
@@ -254,6 +256,7 @@ public class MainMessageServiceTest {
         mainMessage.setId(msgId);
         Mockito.when(mainMessageRepository.findById(msgId)).thenReturn(Optional.of(mainMessage));
 
-        Assert.assertEquals(mainMessage,mainMessageService.delete(msgId));
+        Assert.assertEquals(mainMessage, mainMessageService.delete(msgId));
     }
 }
+

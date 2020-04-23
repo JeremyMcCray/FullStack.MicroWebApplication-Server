@@ -3,7 +3,6 @@ package com.zipcoder.puppychat.controllers;
 import com.zipcoder.puppychat.models.Reply;
 import com.zipcoder.puppychat.services.ReplyService;
 import org.junit.Assert;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -29,14 +28,14 @@ public class ReplyControllerTest {
 
     @Test
     public void createReply() {
-        Mockito.when(service.create(10,20,"Hello")).thenReturn(new Reply());
-        Assert.assertEquals(HttpStatus.OK, controller.createReply(10,20,"Hello").getStatusCode());
+        Mockito.when(service.create(10, 20, "Hello")).thenReturn(new Reply());
+        Assert.assertEquals(HttpStatus.OK, controller.createReply(10, 20, "Hello").getStatusCode());
     }
 
     @Test
     public void updateReplyContent() {
-        Mockito.when(service.updateReplyContent(10,"Hello")).thenReturn(new Reply());
-        Assert.assertEquals(HttpStatus.OK, controller.updateReplyContent(10,"Hello").getStatusCode());
+        Mockito.when(service.updateReplyContent(10, "Hello")).thenReturn(new Reply());
+        Assert.assertEquals(HttpStatus.OK, controller.updateReplyContent(10, "Hello").getStatusCode());
     }
 
     @Test

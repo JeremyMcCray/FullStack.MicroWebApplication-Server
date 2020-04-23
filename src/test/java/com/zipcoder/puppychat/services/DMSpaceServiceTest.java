@@ -4,9 +4,12 @@ import com.zipcoder.puppychat.models.DMSpace;
 import com.zipcoder.puppychat.models.User;
 import com.zipcoder.puppychat.repositories.DMSpaceRepository;
 import com.zipcoder.puppychat.repositories.UserRepository;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.HashSet;
@@ -34,7 +37,7 @@ public class DMSpaceServiceTest {
         DMSpace space = new DMSpace();
         space.setId(spaceId);
         Mockito.when(dmRepo.findById(spaceId)).thenReturn(Optional.of(space));
-        Assert.assertEquals(space,dms.findById(spaceId));
+        Assert.assertEquals(space, dms.findById(spaceId));
     }
 
     @Test
@@ -51,7 +54,7 @@ public class DMSpaceServiceTest {
 
         Mockito.when(dmRepo.findDMSpacesByMembers(user)).thenReturn(set);
         Mockito.when(userRepo.findById(userId)).thenReturn(Optional.of(user));
-        Assert.assertEquals(user.getDm(),dms.findAllByAMember(userId));
+        Assert.assertEquals(user.getDm(), dms.findAllByAMember(userId));
     }
 
     @Test
@@ -72,9 +75,9 @@ public class DMSpaceServiceTest {
         Mockito.when(userRepo.findById(userId2)).thenReturn(Optional.of(user2));
         Mockito.when(dmRepo.save(any())).thenReturn(space);
 
-        DMSpace actual = dms.create(userId,userId2);
-        Assert.assertEquals(space,actual);
-        Assert.assertEquals(s,actual.getMembers());
+        DMSpace actual = dms.create(userId, userId2);
+        Assert.assertEquals(space, actual);
+        Assert.assertEquals(s, actual.getMembers());
     }
 
     @Test
@@ -95,7 +98,7 @@ public class DMSpaceServiceTest {
         Mockito.when(dmRepo.findById(spaceId)).thenReturn(Optional.of(space));
         Mockito.when(dmRepo.save(any())).thenReturn(updatedSpace);
 
-        Assert.assertEquals(updatedSpace,dms.addMember(spaceId,userId));
+        Assert.assertEquals(updatedSpace, dms.addMember(spaceId, userId));
     }
 
     @Test
@@ -105,7 +108,7 @@ public class DMSpaceServiceTest {
         space.setId(spaceId);
         Mockito.when(dmRepo.findById(spaceId)).thenReturn(Optional.of(space));
 
-        Assert.assertEquals(space.getMembers(),dms.listAllMembers(spaceId));
+        Assert.assertEquals(space.getMembers(), dms.listAllMembers(spaceId));
     }
 
     @Test
@@ -115,6 +118,6 @@ public class DMSpaceServiceTest {
         space.setId(spaceId);
         Mockito.when(dmRepo.findById(spaceId)).thenReturn(Optional.of(space));
 
-        Assert.assertEquals(space,dms.delete(spaceId));
+        Assert.assertEquals(space, dms.delete(spaceId));
     }
 }

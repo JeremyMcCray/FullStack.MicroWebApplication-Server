@@ -13,8 +13,6 @@ import org.springframework.http.HttpStatus;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
-
 @RunWith(MockitoJUnitRunner.class)
 public class UserControllerTest {
 
@@ -54,25 +52,25 @@ public class UserControllerTest {
 
     @Test
     public void updatePassword() {
-        Mockito.when(service.changePassword(10,"Password")).thenReturn(new User());
-        Assert.assertEquals(HttpStatus.OK, controller.updatePassword(10,"Password").getStatusCode());
+        Mockito.when(service.changePassword(10, "Password")).thenReturn(new User());
+        Assert.assertEquals(HttpStatus.OK, controller.updatePassword(10, "Password").getStatusCode());
     }
 
     @Test
     public void updateEmail() {
-        Mockito.when(service.changeEmail(10,"user@gmail.com")).thenReturn(new User());
-        Assert.assertEquals(HttpStatus.OK,controller.updateEmail(10,"user@gmail.com").getStatusCode());
+        Mockito.when(service.changeEmail(10, "user@gmail.com")).thenReturn(new User());
+        Assert.assertEquals(HttpStatus.OK, controller.updateEmail(10, "user@gmail.com").getStatusCode());
     }
 
     @Test
     public void updateDisplayName() {
-        Mockito.when(service.changeDisplayName(10,"Romeo")).thenReturn(new User());
-        Assert.assertEquals(HttpStatus.OK,controller.updateDisplayName(10,"Romeo").getStatusCode());
+        Mockito.when(service.changeDisplayName(10, "Romeo")).thenReturn(new User());
+        Assert.assertEquals(HttpStatus.OK, controller.updateDisplayName(10, "Romeo").getStatusCode());
     }
 
     @Test
     public void deleteUser() {
         Mockito.when(service.delete(10)).thenReturn(new User());
-        Assert.assertEquals(HttpStatus.OK,controller.deleteUser(10).getStatusCode());
+        Assert.assertEquals(HttpStatus.OK, controller.deleteUser(10).getStatusCode());
     }
 }

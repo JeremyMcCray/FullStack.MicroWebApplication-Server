@@ -1,10 +1,8 @@
 package com.zipcoder.puppychat.services;
 
 import com.zipcoder.puppychat.models.Channel;
-import com.zipcoder.puppychat.models.DMSpace;
 import com.zipcoder.puppychat.models.User;
 import com.zipcoder.puppychat.repositories.ChannelRepository;
-import com.zipcoder.puppychat.repositories.DMSpaceRepository;
 import com.zipcoder.puppychat.repositories.UserRepository;
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,7 +16,6 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -40,7 +37,7 @@ public class ChannelServiceTest {
         Channel channel = new Channel();
         channel.setId(channelId);
         Mockito.when(chRepo.findById(channelId)).thenReturn(Optional.of(channel));
-        Assert.assertEquals(channel,chService.findById(channelId));
+        Assert.assertEquals(channel, chService.findById(channelId));
     }
 
     @Test
@@ -55,7 +52,7 @@ public class ChannelServiceTest {
 
         Mockito.when(chRepo.findChannelsByAdmins(user)).thenReturn(set);
         Mockito.when(userRepo.findById(userId)).thenReturn(Optional.of(user));
-        Assert.assertEquals(user.getManagedChannels(),chService.findAllByAnAdmin(userId));
+        Assert.assertEquals(user.getManagedChannels(), chService.findAllByAnAdmin(userId));
     }
 
     @Test
@@ -70,7 +67,8 @@ public class ChannelServiceTest {
 
         Mockito.when(chRepo.findChannelsByMembers(user)).thenReturn(set);
         Mockito.when(userRepo.findById(userId)).thenReturn(Optional.of(user));
-        Assert.assertEquals(user.getSubscribedChannels(),chService.findAllByAMember(userId));}
+        Assert.assertEquals(user.getSubscribedChannels(), chService.findAllByAMember(userId));
+    }
 
     @Test
     public void create() {
@@ -83,7 +81,7 @@ public class ChannelServiceTest {
 
         Mockito.when(userRepo.findById(userId)).thenReturn(Optional.of(user));
         Mockito.when(chRepo.save(any())).thenReturn(ch);
-        Assert.assertEquals( ch ,chService.create(userId,channelName));
+        Assert.assertEquals(ch, chService.create(userId, channelName));
     }
 
     @Test
@@ -98,8 +96,8 @@ public class ChannelServiceTest {
         String newName = "We <3 Samoyed!!";
 
         String actualName = chService.changeChannelName(channelId, newName).getName();
-        Assert.assertEquals( newName, actualName );
-        Assert.assertNotEquals( oldName, actualName );
+        Assert.assertEquals(newName, actualName);
+        Assert.assertNotEquals(oldName, actualName);
     }
 
     @Test
@@ -120,7 +118,7 @@ public class ChannelServiceTest {
         Mockito.when(chRepo.findById(chId)).thenReturn(Optional.of(ch));
         Mockito.when(chRepo.save(any())).thenReturn(updatedChannel);
 
-        Assert.assertEquals(updatedChannel,chService.addMember(chId,userId));
+        Assert.assertEquals(updatedChannel, chService.addMember(chId, userId));
     }
 
     @Test
@@ -141,7 +139,7 @@ public class ChannelServiceTest {
         Mockito.when(chRepo.findById(chId)).thenReturn(Optional.of(ch));
         Mockito.when(chRepo.save(any())).thenReturn(updatedChannel);
 
-        Assert.assertEquals(updatedChannel,chService.addAdmin(chId,userId));
+        Assert.assertEquals(updatedChannel, chService.addAdmin(chId, userId));
     }
 
     @Test
@@ -170,8 +168,8 @@ public class ChannelServiceTest {
         Mockito.when(chRepo.findById(chId)).thenReturn(Optional.of(ch));
         Mockito.when(chRepo.save(any())).thenReturn(updatedChannel);
 
-        Channel actual = chService.removeMember(chId,userId2);
-        Assert.assertEquals(updatedChannel,actual);
+        Channel actual = chService.removeMember(chId, userId2);
+        Assert.assertEquals(updatedChannel, actual);
         Assert.assertFalse(actual.getMembers().contains(user2));
     }
 
@@ -201,8 +199,8 @@ public class ChannelServiceTest {
         Mockito.when(chRepo.findById(chId)).thenReturn(Optional.of(ch));
         Mockito.when(chRepo.save(any())).thenReturn(updatedChannel);
 
-        Channel actual = chService.removeAdmin(chId,userId2);
-        Assert.assertEquals(updatedChannel,actual);
+        Channel actual = chService.removeAdmin(chId, userId2);
+        Assert.assertEquals(updatedChannel, actual);
         Assert.assertFalse(actual.getAdmins().contains(user2));
     }
 
@@ -213,7 +211,7 @@ public class ChannelServiceTest {
         channel.setId(spaceId);
         Mockito.when(chRepo.findById(spaceId)).thenReturn(Optional.of(channel));
 
-        Assert.assertEquals(channel.getAdmins(),chService.listAllAdmins(spaceId));
+        Assert.assertEquals(channel.getAdmins(), chService.listAllAdmins(spaceId));
 
     }
 
@@ -224,7 +222,7 @@ public class ChannelServiceTest {
         channel.setId(spaceId);
         Mockito.when(chRepo.findById(spaceId)).thenReturn(Optional.of(channel));
 
-        Assert.assertEquals(channel.getMembers(),chService.listAllMembers(spaceId));
+        Assert.assertEquals(channel.getMembers(), chService.listAllMembers(spaceId));
     }
 
     @Test
@@ -234,6 +232,8 @@ public class ChannelServiceTest {
         channel.setId(spaceId);
         Mockito.when(chRepo.findById(spaceId)).thenReturn(Optional.of(channel));
 
-        Assert.assertEquals(channel,chService.delete(spaceId));
+        Assert.assertEquals(channel, chService.delete(spaceId));
     }
+
+
 }

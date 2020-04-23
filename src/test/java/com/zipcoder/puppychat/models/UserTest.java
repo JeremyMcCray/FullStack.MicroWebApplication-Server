@@ -1,4 +1,5 @@
 package com.zipcoder.puppychat.models;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +12,7 @@ public class UserTest {
     User user = new User();
 
     @Before
-    public void setUp(){
+    public void setUp() {
         user.setId(98);
         user.setPassword("PassW0rd");
         user.setEmail("john@email.com");
@@ -19,45 +20,47 @@ public class UserTest {
     }
 
     @Test
-    public void getUserId() { Assert.assertEquals(98,user.getId()); }
+    public void getUserId() {
+        Assert.assertEquals(98, user.getId());
+    }
 
     @Test
     public void getPassWord() {
-        Assert.assertEquals("PassW0rd",user.getPassword());
+        Assert.assertEquals("PassW0rd", user.getPassword());
     }
 
     @Test
     public void getEmail() {
-        Assert.assertEquals("john@email.com",user.getEmail());
+        Assert.assertEquals("john@email.com", user.getEmail());
     }
 
     @Test
     public void getName() {
-        Assert.assertEquals("John Wick",user.getDisplayName());
+        Assert.assertEquals("John Wick", user.getDisplayName());
     }
 
     @Test
     public void setUserId() {
         user.setId(100);
-        Assert.assertEquals(100,user.getId());
+        Assert.assertEquals(100, user.getId());
     }
 
     @Test
     public void setPassWord() {
         user.setPassword("Pa55word");
-        Assert.assertEquals("Pa55word",user.getPassword());
+        Assert.assertEquals("Pa55word", user.getPassword());
     }
 
     @Test
     public void setEmail() {
         user.setEmail("james@gmail.com");
-        Assert.assertEquals("james@gmail.com",user.getEmail());
+        Assert.assertEquals("james@gmail.com", user.getEmail());
     }
 
     @Test
     public void setName() {
         user.setDisplayName("James Bond");
-        Assert.assertEquals("James Bond",user.getDisplayName());
+        Assert.assertEquals("James Bond", user.getDisplayName());
     }
 
 //    @Test

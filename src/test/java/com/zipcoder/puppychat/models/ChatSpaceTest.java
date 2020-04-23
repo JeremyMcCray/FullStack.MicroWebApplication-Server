@@ -1,9 +1,11 @@
 package com.zipcoder.puppychat.models;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ChatSpaceTest {
 
@@ -17,14 +19,16 @@ public class ChatSpaceTest {
     @Test
     public void setId() {
         c1.setId(50);
-        Assert.assertEquals(50,c1.getId());
+        Assert.assertEquals(50, c1.getId());
     }
 
     @Test
-    public void getId() { Assert.assertEquals(89,c1.getId()); }
+    public void getId() {
+        Assert.assertEquals(89, c1.getId());
+    }
 
     @Test
-    public void testMember(){
+    public void testMember() {
         Set<User> memberList = new HashSet<>();
         memberList.add(new User());
         memberList.add(new User());
@@ -34,7 +38,7 @@ public class ChatSpaceTest {
         cs.setMembers(memberList);
 
         Assert.assertEquals(memberList, cs.getMembers());
-        Assert.assertEquals(3,cs.getMembers().size());
+        Assert.assertEquals(3, cs.getMembers().size());
     }
 
 

@@ -2,7 +2,6 @@ package com.zipcoder.puppychat.controllers;
 
 import com.zipcoder.puppychat.models.DMSpace;
 import com.zipcoder.puppychat.services.DMSpaceService;
-import org.hibernate.service.spi.InjectService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,13 +9,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
 import org.springframework.http.HttpStatus;
 
 import java.util.HashSet;
-import java.util.logging.Handler;
-
-import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DMSpaceControllerTest {

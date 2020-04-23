@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class DMSpaceTest {
     @Test
-    public void testInheritance(){
+    public void testInheritance() {
         DMSpace ds = new DMSpace();
         Assert.assertTrue(ds instanceof ChatSpace);
     }

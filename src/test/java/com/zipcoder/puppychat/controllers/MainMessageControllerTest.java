@@ -13,8 +13,6 @@ import org.springframework.http.HttpStatus;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
-
 @RunWith(MockitoJUnitRunner.class)
 public class MainMessageControllerTest {
 
@@ -39,49 +37,49 @@ public class MainMessageControllerTest {
     @Test
     public void getAllMessageByChannel() {
         Mockito.when(service.findAllByChannel(10)).thenReturn(new ArrayList<>());
-        Assert.assertEquals(HttpStatus.OK,controller.getAllMessageByChannel(10).getStatusCode());
+        Assert.assertEquals(HttpStatus.OK, controller.getAllMessageByChannel(10).getStatusCode());
     }
 
     @Test
     public void getAllMessageByDM() {
         Mockito.when(service.findAllByDM(10)).thenReturn(new ArrayList<>());
-        Assert.assertEquals(HttpStatus.OK,controller.getAllMessageByDM(10).getStatusCode());
+        Assert.assertEquals(HttpStatus.OK, controller.getAllMessageByDM(10).getStatusCode());
     }
 
     @Test
     public void getAllMessageByChat() {
         Mockito.when(service.findAllByChat(10)).thenReturn(new ArrayList<>());
-        Assert.assertEquals(HttpStatus.OK,controller.getAllMessageByChat(10).getStatusCode());
+        Assert.assertEquals(HttpStatus.OK, controller.getAllMessageByChat(10).getStatusCode());
     }
 
     @Test
     public void listAllReplies() {
         Mockito.when(service.listAllReplies(10)).thenReturn(new ArrayList<>());
-        Assert.assertEquals(HttpStatus.OK,controller.listAllReplies(10).getStatusCode());
+        Assert.assertEquals(HttpStatus.OK, controller.listAllReplies(10).getStatusCode());
     }
 
     @Test
     public void createMsg() {
-        Mockito.when(service.create(10,20,"Hello")).thenReturn(new MainMessage());
-        Assert.assertEquals(HttpStatus.OK, controller.createMsg(10,20,"Hello").getStatusCode());
+        Mockito.when(service.create(10, 20, "Hello")).thenReturn(new MainMessage());
+        Assert.assertEquals(HttpStatus.OK, controller.createMsg(10, 20, "Hello").getStatusCode());
     }
 
     @Test
     public void updateMsgContent() {
-        Mockito.when(service.updateMessageContent(10,"hello")).thenReturn(new MainMessage());
-        Assert.assertEquals(HttpStatus.OK,controller.updateMsgContent(10,"hello").getStatusCode());
+        Mockito.when(service.updateMessageContent(10, "hello")).thenReturn(new MainMessage());
+        Assert.assertEquals(HttpStatus.OK, controller.updateMsgContent(10, "hello").getStatusCode());
     }
 
     @Test
     public void reactWithEmoji() {
-        Mockito.when(service.reactWithEmoji(10,10)).thenReturn(new MainMessage());
-        Assert.assertEquals(HttpStatus.OK,controller.reactWithEmoji(10,10).getStatusCode());
+        Mockito.when(service.reactWithEmoji(10, 10)).thenReturn(new MainMessage());
+        Assert.assertEquals(HttpStatus.OK, controller.reactWithEmoji(10, 10).getStatusCode());
     }
 
     @Test
     public void addEmojiCount() {
-        Mockito.when(service.addEmojiCount(10,10)).thenReturn(new MainMessage());
-        Assert.assertEquals(HttpStatus.OK, controller.addEmojiCount(10,10).getStatusCode());
+        Mockito.when(service.addEmojiCount(10, 10)).thenReturn(new MainMessage());
+        Assert.assertEquals(HttpStatus.OK, controller.addEmojiCount(10, 10).getStatusCode());
     }
 
     @Test

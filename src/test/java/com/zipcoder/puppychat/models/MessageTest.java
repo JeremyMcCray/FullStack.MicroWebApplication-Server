@@ -3,7 +3,6 @@ package com.zipcoder.puppychat.models;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +13,7 @@ public class MessageTest {
     public void get_setId() {
         Message m1 = new MainMessage();
         m1.setId(50);
-        Assert.assertEquals(50,m1.getId());
+        Assert.assertEquals(50, m1.getId());
     }
 
     @Test
@@ -26,7 +25,7 @@ public class MessageTest {
         m1.getReactionsCount().put(e, reactionCount);
         Map<Emoji, Integer> expected = m1.getReactionsCount();
 
-        Assert.assertEquals(1,expected.size());
+        Assert.assertEquals(1, expected.size());
         Assert.assertTrue(expected.containsKey(e));
     }
 
@@ -37,10 +36,10 @@ public class MessageTest {
         int reactionCount = 3;
 
         Map<Emoji, Integer> m = new HashMap<>();
-        m.put(e,reactionCount);
+        m.put(e, reactionCount);
 
         m1.setReactionsCount(m);
-        Assert.assertEquals(m,m1.getReactionsCount());
+        Assert.assertEquals(m, m1.getReactionsCount());
     }
 
 
@@ -50,7 +49,7 @@ public class MessageTest {
         User u1 = new User();
         m1.setSpeaker(u1);
         User expected = m1.getSpeaker();
-        Assert.assertEquals(expected,u1);
+        Assert.assertEquals(expected, u1);
     }
 
     @Test
@@ -58,14 +57,14 @@ public class MessageTest {
         Message m1 = new MainMessage();
         m1.setContent("Hello World");
         String expected = m1.getContent();
-        Assert.assertEquals(expected,"Hello World");
+        Assert.assertEquals(expected, "Hello World");
     }
 
 
     @Test
     public void get_and_set_Time() {
         Message m1 = new MainMessage();
-        LocalDateTime d1 =  LocalDateTime.now();
+        LocalDateTime d1 = LocalDateTime.now();
         m1.setTimeStamp(d1);
         LocalDateTime expected = m1.getTimeStamp();
         Assert.assertEquals(expected, d1);

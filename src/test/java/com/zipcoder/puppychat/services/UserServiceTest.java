@@ -1,6 +1,7 @@
 package com.zipcoder.puppychat.services;
 
 import com.zipcoder.puppychat.error.AuthenticationException;
+import com.zipcoder.puppychat.error.ExceptionController;
 import com.zipcoder.puppychat.models.User;
 import com.zipcoder.puppychat.repositories.UserRepository;
 import org.junit.Assert;
@@ -10,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +21,8 @@ import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
+
+    UserService ex;
 
     @Mock
     UserRepository repository;
@@ -63,7 +67,6 @@ public class UserServiceTest {
 
 
         Assert.assertEquals(u, service.findById(1));
-
 
     }
 
@@ -121,7 +124,6 @@ public class UserServiceTest {
         Assert.assertEquals(u, service.delete(1));
     }
 
-
     @Test
     public void loginTest() throws AuthenticationException {
         User u = new User();
@@ -134,7 +136,8 @@ public class UserServiceTest {
         Assert.assertEquals(u, service.login("ei", "pass"));
     }
 
-}
+
+    }
 
 
 

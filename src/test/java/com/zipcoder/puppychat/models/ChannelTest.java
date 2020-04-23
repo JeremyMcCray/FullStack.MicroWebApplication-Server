@@ -14,7 +14,7 @@ public class ChannelTest {
     String chatName = "chat";
 
     @Before
-    public void setUp(){
+    public void setUp() {
         admin.add(new User());
         admin.add(new User());
 
@@ -24,14 +24,13 @@ public class ChannelTest {
 
     @Test
     public void getChannelName() {
-        Assert.assertEquals(chatName, c.getName() );
+        Assert.assertEquals(chatName, c.getName());
     }
 
     @Test
     public void getAdmins() {
         Assert.assertEquals(admin, c.getAdmins());
     }
-
 
 
 }

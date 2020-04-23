@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class ReplyTest {
     @Test
-    public void testRoot(){
+    public void testRoot() {
         Reply r = new Reply();
         MainMessage mm = new MainMessage();
         String content = "this is a reply";

@@ -21,5 +21,4 @@ public class ExceptionController{
     public ResponseEntity<String> handleBadAuth(){
         return new ResponseEntity<>("Oops!! Something is wrong with your credential", HttpStatus.UNAUTHORIZED);
     }
-
 }
