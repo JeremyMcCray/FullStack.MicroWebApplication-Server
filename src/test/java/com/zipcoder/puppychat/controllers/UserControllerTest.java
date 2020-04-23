@@ -44,6 +44,15 @@ public class UserControllerTest {
     }
 
     @Test
+    public void loginTest() {
+        User user = new User();
+        user.setPassword("friend");
+        user.setEmail("abc");
+        Mockito.when(service.login(user.getEmail(), user.getPassword())).thenReturn(user);
+        Assert.assertEquals(HttpStatus.OK, controller.login(user).getStatusCode());
+    }
+
+    @Test
     public void updatePassword() {
         Mockito.when(service.changePassword(10,"Password")).thenReturn(new User());
         Assert.assertEquals(HttpStatus.OK, controller.updatePassword(10,"Password").getStatusCode());
