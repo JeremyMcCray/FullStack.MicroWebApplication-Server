@@ -4,5 +4,10 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/testDB?serverTimezone=UTC
     username: root
+<<<<<<< HEAD
     password: GOTjob@123
     driver-class-name: com.mysql.cj.jdbc.Driver
+=======
+    password: spaz3286
+    driver-class-name: com.mysql.cj.jdbc.Driver
+>>>>>>> 7334e17d1212c0312ee7d11d6139c3c61903af7c
