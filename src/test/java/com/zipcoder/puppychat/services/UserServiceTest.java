@@ -1,6 +1,8 @@
 package com.zipcoder.puppychat.services;
 
 import com.zipcoder.puppychat.error.AuthenticationException;
+import com.zipcoder.puppychat.error.DuplicateDataException;
+import com.zipcoder.puppychat.error.NotFoundException;
 import com.zipcoder.puppychat.models.User;
 import com.zipcoder.puppychat.repositories.UserRepository;
 import org.junit.Assert;
@@ -60,11 +62,20 @@ public class UserServiceTest {
         u.setEmail("tomsEmail@email.com");
 
         Mockito.when(repository.findById(uid)).thenReturn(Optional.of(u));
-
-
         Assert.assertEquals(u, service.findById(1));
+    }
 
+    @Test(expected = DuplicateDataException.class)
+    public void create1() {
+        int uid = 1;
 
+        User u = new User();
+        u.setId(uid);
+        u.setDisplayName("Tom");
+        u.setEmail("tomsEmail@email.com");
+
+        Mockito.when(repository.findUserByEmail("tomsEmail@email.com")).thenReturn(u);
+        service.create(u);
     }
 
     @Test
@@ -122,18 +133,33 @@ public class UserServiceTest {
     }
 
 
-    @Test
-    public void loginTest() throws AuthenticationException {
+    @Test(expected = AuthenticationException.class)
+    public void loginTest() {
         User u = new User();
 
         u.setEmail("ei");
         u.setPassword("pass");
 
         Mockito.when(repository.findUserByEmail(u.getEmail())).thenReturn(u);
-
-        Assert.assertEquals(u, service.login("ei", "pass"));
+        Assert.assertEquals(u, service.login("ei", "passW0rd"));
     }
 
+    @Test(expected = AuthenticationException.class)
+    public void loginTest1() {
+
+        service.login("ei", "pass");
+    }
+
+    @Test
+    public void loginTest2() {
+        User u = new User();
+
+        u.setEmail("ei");
+        u.setPassword("pass");
+
+         Mockito.when(repository.findUserByEmail(u.getEmail())).thenReturn(u);
+        Assert.assertEquals(u, service.login("ei", "pass"));
+    }
 }
 
 

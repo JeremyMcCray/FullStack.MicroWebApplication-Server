@@ -51,7 +51,7 @@ public class MainMessageControllerTest {
     @Test
     public void getAllMessageByChat() {
         Mockito.when(service.findAllByChat(10)).thenReturn(new ArrayList<>());
-        Assert.assertEquals(HttpStatus.OK,controller.getAllMessageByChat(10).getStatusCode());
+        Assert.assertEquals(HttpStatus.OK, controller.getAllMessageByChat(10).getStatusCode());
     }
 
     @Test

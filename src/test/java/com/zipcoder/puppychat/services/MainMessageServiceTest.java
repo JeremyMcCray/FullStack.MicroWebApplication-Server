@@ -90,6 +90,10 @@ public class MainMessageServiceTest {
     }
 
     @Test
+    public void findAllByChat() {
+    }
+
+    @Test
     public void listAllReplies() {
         int msgId = 30;
         MainMessage msg = new MainMessage();
