@@ -49,18 +49,6 @@ public class MainMessageService {
         return mainMessageRepository.findMainMessagesBySpeaker(u);
     }
 
-    // find all by Channel
-    public Iterable<MainMessage> findAllByChannel(int channelId){
-        Channel chat = channelRepository.findById(channelId).orElseThrow(NotFoundException::new);
-        return mainMessageRepository.findMainMessageByChatSpace(chat);
-    }
-
-    //find all by DM space
-    public Iterable<MainMessage> findAllByDM(int dmSpaceID){
-        DMSpace chat = dmSpaceRepository.findById(dmSpaceID).orElseThrow(NotFoundException::new);
-        return mainMessageRepository.findMainMessageByChatSpace(chat);
-    }
-
     //find all by chat
     public Iterable<MainMessage> findAllByChat(int id){
         Optional<DMSpace> dm = dmSpaceRepository.findById(id);

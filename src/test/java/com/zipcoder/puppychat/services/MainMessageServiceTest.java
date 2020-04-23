@@ -14,7 +14,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -60,7 +59,7 @@ public class MainMessageServiceTest {
     }
 
     @Test
-    public void findAllByChannel() {
+    public void findAllByChatId() {
         MainMessage msg = new MainMessage();
         List<MainMessage> list = new ArrayList<>();
         list.add(msg);
@@ -71,27 +70,25 @@ public class MainMessageServiceTest {
 
         Mockito.when(mainMessageRepository.findMainMessageByChatSpace(channel)).thenReturn(list);
         Mockito.when(channelRepository.findById(channelId)).thenReturn(Optional.of(channel));
-        Assert.assertEquals(list,mainMessageService.findAllByChannel(channelId));
+        Assert.assertEquals(list,mainMessageService.findAllByChat(channelId));
     }
 
+
     @Test
-    public void findAllByDM() {
+    public void findAllByChatId_dm() {
         MainMessage msg = new MainMessage();
         List<MainMessage> list = new ArrayList<>();
         list.add(msg);
 
-        int dmId = 1;
+        int dmlId = 1;
         DMSpace dm = new DMSpace();
-        dm.setId(dmId);
+        dm.setId(dmlId);
 
         Mockito.when(mainMessageRepository.findMainMessageByChatSpace(dm)).thenReturn(list);
-        Mockito.when(dmSpaceRepository.findById(dmId)).thenReturn(Optional.of(dm));
-        Assert.assertEquals(list,mainMessageService.findAllByDM(dmId));
+        Mockito.when(dmSpaceRepository.findById(dmlId)).thenReturn(Optional.of(dm));
+        Assert.assertEquals(list,mainMessageService.findAllByChat(dmlId));
     }
 
-    @Test
-    public void findAllByChat() {
-    }
 
     @Test
     public void listAllReplies() {
