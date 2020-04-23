@@ -1,11 +1,14 @@
 package com.zipcoder.puppychat.services;
 
+import com.zipcoder.puppychat.error.AuthenticationException;
 import com.zipcoder.puppychat.models.User;
 import com.zipcoder.puppychat.repositories.UserRepository;
-import org.junit.*;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
@@ -25,13 +28,13 @@ public class UserServiceTest {
 
     @Test
     public void findById() {
-        User u= new User();
+        User u = new User();
         service.create(u);
         u.setId(1);
 
         Mockito.when(repository.findById(1)).thenReturn(Optional.of(u));
 
-        Assert.assertEquals(service.findById(1),u);
+        Assert.assertEquals(service.findById(1), u);
     }
 
     @Test
@@ -44,7 +47,7 @@ public class UserServiceTest {
         List<User> users1 = repository.findAll();
         Mockito.when(repository.findAll()).thenReturn(users1);
 
-        Assert.assertEquals(users1,service.findAll());
+        Assert.assertEquals(users1, service.findAll());
     }
 
     @Test
@@ -59,7 +62,7 @@ public class UserServiceTest {
         Mockito.when(repository.findById(uid)).thenReturn(Optional.of(u));
 
 
-        Assert.assertEquals( u,service.findById(1));
+        Assert.assertEquals(u, service.findById(1));
 
 
     }
@@ -74,8 +77,8 @@ public class UserServiceTest {
         Mockito.when(repository.findById(uid)).thenReturn(Optional.of(u));
         Mockito.when(repository.save(any())).thenReturn(u);
 
-       Assert.assertEquals(u,service.changePassword(1,"poss"));
-       Assert.assertEquals(u.getPassword(),"poss");
+        Assert.assertEquals(u, service.changePassword(1, "poss"));
+        Assert.assertEquals(u.getPassword(), "poss");
 
     }
 
@@ -89,8 +92,8 @@ public class UserServiceTest {
         Mockito.when(repository.findById(uid)).thenReturn(Optional.of(u));
         Mockito.when(repository.save(any())).thenReturn(u);
 
-        Assert.assertEquals(u,service.changeEmail(1,"poss"));
-        Assert.assertEquals(u.getEmail(),"poss");
+        Assert.assertEquals(u, service.changeEmail(1, "poss"));
+        Assert.assertEquals(u.getEmail(), "poss");
     }
 
     @Test
@@ -104,8 +107,8 @@ public class UserServiceTest {
 
         service.changeDisplayName(1, "robert");
 
-        Assert.assertEquals(service.findById(1),u);
-        Assert.assertEquals(u.getDisplayName(),"robert");
+        Assert.assertEquals(service.findById(1), u);
+        Assert.assertEquals(u.getDisplayName(), "robert");
     }
 
     @Test
@@ -115,6 +118,25 @@ public class UserServiceTest {
 
         Mockito.when(repository.findById(1)).thenReturn(Optional.of(u));
 
-        Assert.assertEquals(u,service.delete(1));
+        Assert.assertEquals(u, service.delete(1));
     }
+
+
+    @Test
+    public void loginTest() throws AuthenticationException {
+        User u = new User();
+
+        u.setEmail("ei");
+        u.setPassword("pass");
+
+        Mockito.when(repository.findUserByEmail(u.getEmail())).thenReturn(u);
+
+        Assert.assertEquals(u, service.login("ei", "pass"));
+    }
+
 }
+
+
+
+
+
