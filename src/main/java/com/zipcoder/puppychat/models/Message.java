@@ -22,27 +22,22 @@ public abstract class Message {
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime timeStamp;
 
-    @ElementCollection
-    @CollectionTable(name = "reaction_mapping",
-            joinColumns = {@JoinColumn(name = "message_id", referencedColumnName = "id")})
-    @MapKeyColumn(name = "emoji_name")
-    @Column
-    private Map<Emoji, Integer> reactionsCount;
+//    @ElementCollection
+//    @CollectionTable(name = "reaction_mapping",
+//            joinColumns = {@JoinColumn(name = "message_id", referencedColumnName = "id")})
+//    @MapKeyColumn(name = "emoji_id")
+//    @Column
+//    private Map<Integer, Integer> reactionsCount;
+
+    @OneToMany
+    private List<EmojiCount> emojiCounts;
 
     public int getId() { return id; }
 
     public void setId(int id) { this.id = id; }
 
     public Message() {
-        this.reactionsCount = new HashMap<>();
-    }
-
-    public Map<Emoji, Integer> getReactionsCount() {
-        return reactionsCount;
-    }
-
-    public void setReactionsCount(Map<Emoji, Integer> reactions) {
-        this.reactionsCount = reactions;
+        this.emojiCounts = new ArrayList<>();
     }
 
     public User getSpeaker() {
@@ -69,4 +64,11 @@ public abstract class Message {
         this.timeStamp = timeStamp;
     }
 
+    public List<EmojiCount> getEmojiCounts() {
+        return emojiCounts;
+    }
+
+    public void setEmojiCounts(List<EmojiCount> emojiCounts) {
+        this.emojiCounts = emojiCounts;
+    }
 }

@@ -37,18 +37,6 @@ public class MainMessageControllerTest {
     }
 
     @Test
-    public void getAllMessageByChannel() {
-        Mockito.when(service.findAllByChannel(10)).thenReturn(new ArrayList<>());
-        Assert.assertEquals(HttpStatus.OK,controller.getAllMessageByChannel(10).getStatusCode());
-    }
-
-    @Test
-    public void getAllMessageByDM() {
-        Mockito.when(service.findAllByDM(10)).thenReturn(new ArrayList<>());
-        Assert.assertEquals(HttpStatus.OK,controller.getAllMessageByDM(10).getStatusCode());
-    }
-
-    @Test
     public void getAllMessageByChat() {
         Mockito.when(service.findAllByChat(10)).thenReturn(new ArrayList<>());
         Assert.assertEquals(HttpStatus.OK, controller.getAllMessageByChat(10).getStatusCode());
