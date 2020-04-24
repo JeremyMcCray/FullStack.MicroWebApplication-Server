@@ -31,6 +31,9 @@ public class MainMessageServiceTest {
     EmojiRepository emojiRepository;
     @Mock
     ReplyRepository replyRepository;
+    @Mock
+    EmojiCountRepository emojiCountRepository;
+
     @InjectMocks
     MainMessageService mainMessageService;
 
@@ -133,15 +136,37 @@ public class MainMessageServiceTest {
         Emoji emoji = new Emoji();
         emoji.setId(emojiId);
 
-        MainMessage updatedMsg = new MainMessage();
-        updatedMsg.setId(msgId);
-        updatedMsg.setReactionsCount(new HashMap<>());
-        updatedMsg.getReactionsCount().put(emoji,1);
-
         Mockito.when(mainMessageRepository.findById(msgId)).thenReturn(Optional.of(msg));
         Mockito.when(emojiRepository.findById(emojiId)).thenReturn(Optional.of(emoji));
-        Mockito.when(mainMessageRepository.save(any())).thenReturn(updatedMsg);
-        Assert.assertEquals(updatedMsg ,mainMessageService.reactWithEmoji(msgId,emojiId));
+        Mockito.when(mainMessageRepository.save(any())).thenReturn(msg);
+        Assert.assertEquals(msg ,mainMessageService.reactWithEmoji(msgId,emojiId));
+    }
+
+    @Test
+    public void reactWithEmoji_regularCase2() {
+        int msgId = 10;
+        MainMessage msg = new MainMessage();
+        msg.setId(msgId);
+
+        int emojiId = 1;
+        Emoji emoji = new Emoji();
+        emoji.setId(emojiId);
+        EmojiCount ec = new EmojiCount();
+        ec.setCount(5);
+        ec.setEmojiId(emojiId);
+        msg.getEmojiCounts().add(ec);
+
+        int emojiId2 = 2;
+        Emoji emoji2 = new Emoji();
+        emoji2.setId(emojiId2);
+        EmojiCount ec2 = new EmojiCount();
+        ec2.setCount(2);
+        ec2.setEmojiId(emojiId2);
+
+        Mockito.when(mainMessageRepository.findById(msgId)).thenReturn(Optional.of(msg));
+        Mockito.when(emojiRepository.findById(emojiId2)).thenReturn(Optional.of(emoji2));
+        Mockito.when(mainMessageRepository.save(any())).thenReturn(msg);
+        Assert.assertEquals(msg ,mainMessageService.reactWithEmoji(msgId,emojiId2));
     }
 
     @Test(expected = DuplicateDataException.class)
@@ -154,14 +179,45 @@ public class MainMessageServiceTest {
         Emoji emoji = new Emoji();
         emoji.setId(emojiId);
 
-        msg.setReactionsCount(new HashMap<>());
-        msg.getReactionsCount().put(emoji,5);
+        EmojiCount ec = new EmojiCount();
+        ec.setCount(5);
+        ec.setEmojiId(emojiId);
+        msg.getEmojiCounts().add(ec);
 
+//        msg.setReactionsCount(new HashMap<>());
+//        msg.getReactionsCount().put(emoji.getId(),5);
+//
         Mockito.when(mainMessageRepository.findById(msgId)).thenReturn(Optional.of(msg));
         Mockito.when(emojiRepository.findById(emojiId)).thenReturn(Optional.of(emoji));
         mainMessageService.reactWithEmoji(msgId,emojiId);
     }
 
+    @Test
+    public void addEmojiCount_regularCase2() {
+        int msgId = 10;
+        MainMessage msg = new MainMessage();
+        msg.setId(msgId);
+
+        int emojiId = 1;
+        Emoji emoji = new Emoji();
+        emoji.setId(emojiId);
+        EmojiCount ec = new EmojiCount();
+        ec.setCount(5);
+        ec.setEmojiId(emojiId);
+        msg.getEmojiCounts().add(ec);
+
+        int emojiId2 = 2;
+        Emoji emoji2 = new Emoji();
+        emoji2.setId(emojiId2);
+        EmojiCount ec2 = new EmojiCount();
+        ec2.setCount(2);
+        ec2.setEmojiId(emojiId2);
+        msg.getEmojiCounts().add(ec2);
+
+        Mockito.when(mainMessageRepository.findById(msgId)).thenReturn(Optional.of(msg));
+        Mockito.when(emojiRepository.findById(emojiId2)).thenReturn(Optional.of(emoji2));
+        mainMessageService.addEmojiCount(msgId,emojiId2);
+    }
 
     @Test
     public void addEmojiCount_regularCase() {
@@ -172,38 +228,32 @@ public class MainMessageServiceTest {
         int emojiId = 1;
         Emoji emoji = new Emoji();
         emoji.setId(emojiId);
-
-        msg.setReactionsCount(new HashMap<>());
-        msg.getReactionsCount().put(emoji,5);
-
-        MainMessage updatedMsg = new MainMessage();
-        updatedMsg.setId(msgId);
-        updatedMsg.setReactionsCount(new HashMap<>());
-        updatedMsg.getReactionsCount().put(emoji,6);
+        EmojiCount ec = new EmojiCount();
+        ec.setCount(5);
+        ec.setEmojiId(emojiId);
+        msg.getEmojiCounts().add(ec);
 
         Mockito.when(mainMessageRepository.findById(msgId)).thenReturn(Optional.of(msg));
         Mockito.when(emojiRepository.findById(emojiId)).thenReturn(Optional.of(emoji));
-        Mockito.when(mainMessageRepository.save(any())).thenReturn(updatedMsg);
-        Assert.assertEquals(updatedMsg ,mainMessageService.addEmojiCount(msgId,emojiId));
+        Mockito.when(mainMessageRepository.save(any())).thenReturn(msg);
+        Assert.assertEquals(msg ,mainMessageService.addEmojiCount(msgId,emojiId));
     }
+
 
     @Test(expected = NotFoundException.class)
     public void addEmojiCount_failCase() {
         int msgId = 10;
         MainMessage msg = new MainMessage();
         msg.setId(msgId);
-
         int emojiId = 1;
         Emoji emoji = new Emoji();
         emoji.setId(emojiId);
-
-        MainMessage updatedMsg = new MainMessage();
-        updatedMsg.setId(msgId);
-
         Mockito.when(mainMessageRepository.findById(msgId)).thenReturn(Optional.of(msg));
         Mockito.when(emojiRepository.findById(emojiId)).thenReturn(Optional.of(emoji));
-        Assert.assertEquals(updatedMsg ,mainMessageService.addEmojiCount(msgId,emojiId));
+        mainMessageService.addEmojiCount(msgId,emojiId);
     }
+
+
 
     @Test
     public void create_in_channel() {

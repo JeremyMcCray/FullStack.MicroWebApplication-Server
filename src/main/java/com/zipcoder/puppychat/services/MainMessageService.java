@@ -7,7 +7,6 @@ import com.zipcoder.puppychat.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -20,6 +19,7 @@ public class MainMessageService {
     DMSpaceRepository dmSpaceRepository;
     EmojiRepository emojiRepository;
     ReplyRepository replyRepository;
+    EmojiCountRepository emojiCountRepository;
 
 //All on one line because this was getting really long\\\ vvv
     @Autowired
@@ -29,7 +29,8 @@ public class MainMessageService {
             ChannelRepository channelRepository,
             DMSpaceRepository DMSpaceRepository,
             EmojiRepository emojiRepository,
-            ReplyRepository replyRepository)
+            ReplyRepository replyRepository,
+            EmojiCountRepository emojiCountRepository)
     {
         this.mainMessageRepository = mainMessageRepository;
         this.userRepository = userRepository;
@@ -37,6 +38,7 @@ public class MainMessageService {
         this.dmSpaceRepository = DMSpaceRepository;
         this.emojiRepository = emojiRepository;
         this.replyRepository = replyRepository;
+        this.emojiCountRepository = emojiCountRepository;
     }
 
     public MainMessage findById(int id){
@@ -76,19 +78,32 @@ public class MainMessageService {
     //react with emoji
     public MainMessage reactWithEmoji(int messageId, int emojiId){
         MainMessage message = findById(messageId);
-        Emoji emoji = emojiRepository.findById(emojiId).orElseThrow(NotFoundException::new);
-        if(message.getReactionsCount().containsKey(emoji)) throw new DuplicateDataException();
-        message.getReactionsCount().put(emoji,1);
+        emojiRepository.findById(emojiId).orElseThrow(NotFoundException::new);
+
+        for(EmojiCount ec : message.getEmojiCounts()){
+            if(ec.getEmojiId()==emojiId)
+                throw new DuplicateDataException();
+        }
+        EmojiCount newEc = new EmojiCount();
+        newEc.setEmojiId(emojiId);
+        newEc.setCount(1);
+        emojiCountRepository.save(newEc);
+        message.getEmojiCounts().add(newEc);
         return mainMessageRepository.save(message);
     }
 
     //add emoji count
     public MainMessage addEmojiCount(int messageId, int emojiId){
         MainMessage message = findById(messageId);
-        Emoji emoji = emojiRepository.findById(emojiId).orElseThrow(NotFoundException::new);
-        if(!message.getReactionsCount().containsKey(emoji)) throw new NotFoundException();
-        message.getReactionsCount().replace(emoji, message.getReactionsCount().get(emoji)+1 );
-        return mainMessageRepository.save(message);
+        emojiRepository.findById(emojiId).orElseThrow(NotFoundException::new);
+
+        for(EmojiCount ec : message.getEmojiCounts()) {
+            if (ec.getEmojiId() == emojiId) {
+                ec.setCount(ec.getCount()+1);
+                return mainMessageRepository.save(message);
+            }
+        }
+        throw new NotFoundException();
     }
 
     public MainMessage create(int userId, int chatSpaceId, String content){

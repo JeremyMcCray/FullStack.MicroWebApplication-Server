@@ -6,7 +6,9 @@ import org.junit.Test;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class MessageTest {
 
@@ -21,26 +23,34 @@ public class MessageTest {
     public void getReactions() {
         Message m1 = new MainMessage();
         Emoji e = new Emoji();
+        e.setId(1);
         int reactionCount = 3;
+        EmojiCount ec = new EmojiCount();
+        ec.setEmojiId(1);
+        ec.setCount(reactionCount);
 
-        m1.getReactionsCount().put(e, reactionCount);
-        Map<Emoji, Integer> expected = m1.getReactionsCount();
+        m1.getEmojiCounts().add(ec);
+        List<EmojiCount> expected = m1.getEmojiCounts();
 
         Assert.assertEquals(1,expected.size());
-        Assert.assertTrue(expected.containsKey(e));
+        Assert.assertTrue(expected.contains(ec));
     }
 
     @Test
     public void setReaction() {
         Message m1 = new MainMessage();
         Emoji e = new Emoji();
+        e.setId(1);
         int reactionCount = 3;
+        EmojiCount ec = new EmojiCount();
+        ec.setEmojiId(1);
+        ec.setCount(reactionCount);
 
-        Map<Emoji, Integer> m = new HashMap<>();
-        m.put(e,reactionCount);
+        m1.getEmojiCounts().add(ec);
+        List<EmojiCount> expected = m1.getEmojiCounts();
 
-        m1.setReactionsCount(m);
-        Assert.assertEquals(m,m1.getReactionsCount());
+        m1.setEmojiCounts(expected);
+        Assert.assertEquals(expected,m1.getEmojiCounts());
     }
 
 
